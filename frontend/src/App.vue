@@ -21,7 +21,7 @@
           <center><router-view/></center>
         </div>
       </center>
-			<app-module1></app-module1>
+			<app-module2></app-module2>
       <app-footer id="appFooter"></app-footer>
     </v-content>
   </v-app>
@@ -30,7 +30,7 @@
 <script>
 import Footer from './components/Footer'
 import Home from './components/Home'
-import Module1 from './components/questions/Module1Admin'
+import Module2 from './components/questions/Module2Admin'
 import { eventBus } from './main'
 export default {
 	data () {
@@ -40,7 +40,7 @@ export default {
 	},
 	components: {
 		'app-footer': Footer,
-		'app-module1': Module1
+		'app-module2': Module2
 	},
 	created () {
 		'App'

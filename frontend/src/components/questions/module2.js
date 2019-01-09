@@ -1,4 +1,4 @@
-export const module2 = {
+module.exports = {
 	'0': {
 		'situationText': 'Your assistant is about to prepare the skin with iodine antiseptic solution, however you remember that the client is allergic to iodine.  Instead, you tell your assistant to use:',
 		'choices': [{

@@ -92,7 +92,7 @@
                 label="Choice1 Impact">
               </v-text-field>
             </v-flex>
-            <v-divider></v-divider>
+            <v-toolbar color="primary" height="10" />
             <v-flex>
               <v-text-field v-model="choice2" 
                 @blur="$v.choice2.$touch()"
@@ -120,6 +120,7 @@
                 label="choice2 Impact">
               </v-text-field>
             </v-flex>
+            <v-toolbar color="primary" height="10" />
             <v-flex>
               <v-text-field v-model="choice3" 
                 @blur="$v.choice3.$touch()"
@@ -242,12 +243,12 @@ export default {
       formData.append('choice3Comment', this.choice3Comment)
       formData.append('choice3Impact', this.choice3Impact)
       formData.append('image', this.imageFile)
-      axios.post(backendServer + '/saveModule2Question/', formData, {
+      axios.post(backendServer + '/saveModule1Question/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       }).then(() => {
-        // this.addQnDialog = false
+        this.addQnDialog = false
       })
     }
   },
