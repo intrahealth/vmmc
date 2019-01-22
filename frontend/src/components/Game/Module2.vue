@@ -131,7 +131,7 @@
 <script>
 import moment from 'moment'
 import { eventBus } from '../../main'
-import { module2 } from '../questions/module2.js'
+let module2 = require('../questions/module2.js')
 export default {
 	data () {
 		return {
