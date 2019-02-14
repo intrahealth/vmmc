@@ -39,9 +39,14 @@
 				<v-flex id="question" v-show='loadingNextClient'>
 					{{client | formatClient}} Coming Now<v-progress-linear v-model="waitingPercent" color="primary" class="mb-0"></v-progress-linear>
 				</v-flex>
+				<v-flex xs4>
+					<div class="clientImg">
+						<v-img :aspect-ratio="16/9" :src="getImgUrl()" v-bind:alt="client" max-height="450"></v-img>
+					</div>
+				</v-flex>
 				<v-flex id="question" height="1" v-show='!loadingNextClient' text-sm-left>
 					<b>{{client | formatClient}}</b>
-					<v-card class="scroll" height="200">
+					<v-card class="scroll" height="300">
 						<v-card-text>
 							<v-layout column>
 								<v-flex>
@@ -145,6 +150,11 @@ export default {
 				clientA: 'pending',
 				clientB: 'pending',
 				clientC: 'pending'
+			},
+			clientsImg: {
+				clientA: 'Mod1_client-A',
+				clientB: 'Mod1_client-B',
+				clientC: 'Mod1_client-C'
 			},
 			loadingNextClient: false,
 			waitingPercent: 0,
@@ -315,6 +325,17 @@ export default {
 				}
 				this.$refs[k][0].isActive = false
 			}
+		},
+		getImgUrl () {
+
+	     	if (this.client === 'clientA') {
+				return require('../../assets/images/module1/' + this.clientsImg.clientA + '.jpg')
+			} else if (this.client === 'clientB') {
+				return require('../../assets/images/module1/' + this.clientsImg.clientB + '.jpg')
+			} else if (this.client === 'clientC') {
+				return require('../../assets/images/module1/' + this.clientsImg.clientC + '.jpg')
+			}
+			
 		}
 	},
 	created: function () {
@@ -325,7 +346,7 @@ export default {
 
 <style scoped>
 #question {
-  padding: 20px 0px 20px;
+  padding: 0px 0px 20px;
 }
 #answer {
 	padding: 0px 70px;
@@ -356,6 +377,10 @@ export default {
 }
 .scroll {
   overflow-y: auto;
+}
+.clientImg {
+  width: 100;
+  height: 80;
 }
 .meter_box {
   position: relative;
