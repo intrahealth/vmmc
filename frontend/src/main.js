@@ -4,7 +4,7 @@ import './plugins/vuetify'
 import Vuelidate from 'vuelidate'
 import VueDragDrop from 'vue-drag-drop'
 import App from './App.vue'
-import store from './store'
+import {store} from './store'
 import router from './router'
 
 Vue.config.productionTip = false
