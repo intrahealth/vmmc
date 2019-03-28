@@ -50,6 +50,7 @@
 			</v-card>
 		</template>
 		<template>
+			{{answersTracker}}
 			<v-layout column>
 				<v-flex>
 					<v-toolbar color="#566573">
@@ -144,7 +145,7 @@
               </label>
 						</v-flex>
 						<v-flex xs4 text-sm-center>
-							<v-btn color="error" to='/'><v-icon left>cancel</v-icon>Exit Game</v-btn>
+							<v-btn round color="error" to='/'><v-icon left>cancel</v-icon>Exit Game</v-btn>
 						</v-flex>
 						<v-flex xs4 text-sm-right>
               <label @click="checkAnswer()" style="cursor:pointer">
@@ -160,11 +161,17 @@
 
 <script>
 import moment from 'moment'
+import axios from 'axios'
+import { uuid } from 'vue-uuid'
 import { eventBus } from '../../main'
 let module2 = require('../questions/module2.js')
+const config = require('../../../config')
+const isProduction = process.env.NODE_ENV === 'production'
+const backendServer = (isProduction ? config.build.backend : config.dev.backend)
 export default {
 	data () {
 		return {
+			sessionID: '',
 			radioDisabled: false,
 			question: '',
 			choices: [],
@@ -429,6 +436,18 @@ export default {
 				this.nextQuestion = 0
 				this.gameRunning = true
 			} else {
+				// save prev response into database
+				let formData = new FormData()
+				formData.append('userID', this.$store.state.auth.userID)
+				formData.append('sessionID', this.sessionID)
+				formData.append('module', 2)
+				formData.append('answers', JSON.stringify(this.answersTracker))
+				axios.post(backendServer + '/saveAnswers/', formData, {
+					headers: {
+						'Content-Type': 'multipart/form-data'
+					}
+				})
+
 				this.questionNumber++
 			}
 			if (this.nextQuestion === null) {
@@ -448,8 +467,7 @@ export default {
 			this.markSelected()
 		},
 		getImgUrl () {
-
-	     	if (this.questionNumber === 1 ) {
+	    if (this.questionNumber === 1 ) {
 				return require('../../assets/images/module2/' + this.questionImg.question1 )
 			} else if (this.questionNumber === 2) {
 				return require('../../assets/images/module2/' + this.questionImg.question2 )
@@ -649,6 +667,7 @@ export default {
 			
 	},
 	created: function () {
+		this.sessionID = uuid.v4()
 		this.loadNextQuestion()
 		this.$store.state.moduleProgress.two.status = 'pending'
 	}

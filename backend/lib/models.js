@@ -43,10 +43,30 @@ let Users = new mongoose.Schema({
     type: Date
   }
 })
+let answers = new mongoose.Schema({
+  player: {
+    type: Schema.Types.ObjectId,
+    ref: 'Users',
+    required: true
+  },
+  sessionID: {
+    type: String,
+    required: true
+  },
+  module: {
+    type: Number,
+    required: true
+  },
+  answers: {
+    type: Object
+  }
+})
 
 let RolesModel = mongoose.model('Roles', Roles)
 let UsersModel = mongoose.model('Users', Users)
+let answersModel = mongoose.model('answers', answers)
 module.exports = {
   UsersModel,
-  RolesModel
+  RolesModel,
+  answersModel
 }

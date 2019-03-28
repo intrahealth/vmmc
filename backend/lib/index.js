@@ -11,6 +11,7 @@ const mongoose = require('mongoose');
 const models = require('./models')
 const config = require('./config');
 
+const database = config.getConf("DB_NAME")
 const mongoUser = config.getConf("DB_USER")
 const mongoPasswd = config.getConf("DB_PASSWORD")
 const mongoHost = config.getConf("DB_HOST")
@@ -69,7 +70,6 @@ app.use(cors({
   credentials: true
 }));
 
-const database = config.getConf("DB_NAME")
 if (mongoUser && mongoPasswd) {
   var uri = `mongodb://${mongoUser}:${mongoPasswd}@${mongoHost}:${mongoPort}/${database}`;
 } else {
@@ -121,11 +121,6 @@ app.post('/authenticate', (req, res) => {
   const form = new formidable.IncomingForm();
   form.parse(req, (err, fields, files) => {
     winston.info('Authenticating user ' + fields.username)
-    const database = config.getConf("DB_NAME")
-    const mongoUser = config.getConf("DB_USER")
-    const mongoPasswd = config.getConf("DB_PASSWORD")
-    const mongoHost = config.getConf("DB_HOST")
-    const mongoPort = config.getConf("DB_PORT")
 
     if (mongoUser && mongoPasswd) {
       var uri = `mongodb://${mongoUser}:${mongoPasswd}@${mongoHost}:${mongoPort}/${database}`;
@@ -191,7 +186,6 @@ app.post('/addUser', (req, res) => {
   winston.info("Received a signup request")
   const form = new formidable.IncomingForm();
   form.parse(req, (err, fields, files) => {
-    const database = config.getConf("DB_NAME")
 
     if (mongoUser && mongoPasswd) {
       var uri = `mongodb://${mongoUser}:${mongoPasswd}@${mongoHost}:${mongoPort}/${database}`;
@@ -235,6 +229,57 @@ app.post('/addUser', (req, res) => {
           }
           res.status(500).json({
             error: "Internal error occured"
+          })
+        }
+      })
+    })
+  })
+})
+
+app.post('/saveAnswers', (req, res) => {
+  const form = new formidable.IncomingForm();
+  form.parse(req, (err, fields, files) => {
+    if (mongoUser && mongoPasswd) {
+      var uri = `mongodb://${mongoUser}:${mongoPasswd}@${mongoHost}:${mongoPort}/${database}`;
+    } else {
+      var uri = `mongodb://${mongoHost}:${mongoPort}/${database}`;
+    }
+    fields.answers = JSON.parse(fields.answers)
+    mongoose.connect(uri, {}, () => {
+      models.answersModel.find({sessionID: fields.sessionID, player: fields.userID}, (err, data) => {
+        if(data.length == 0) {
+          const answers = new models.answersModel({
+            player: fields.userID,
+            sessionID: fields.sessionID,
+            module: fields.module,
+            answers: fields.answers
+          })
+          answers.save((err, data) => {
+            if (err) {
+              winston.error(err)
+              res.status(500).json({
+                error: "Internal error occured"
+              })
+            } else {
+              winston.info('Answer saved successfully')
+              res.status(200).send()
+            }
+          })
+        } else {
+          models.answersModel.update({sessionID: fields.sessionID, player: fields.userID}, {
+            $set: {
+              answers: fields.answers
+            }
+          }, (err, data) => {
+            if (err) {
+              winston.error(err)
+              res.status(500).json({
+                error: "Internal error occured"
+              })
+            } else {
+              winston.info('Answer saved successfully')
+              res.status(200).send()
+            }
           })
         }
       })

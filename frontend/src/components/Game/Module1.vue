@@ -114,7 +114,7 @@
               Client C: <label class='clientMoodStatus'>{{$store.state.mod1ClientsMood.clientC}}</label>
             </v-flex>
             <v-flex xs3 style="position: absolute; right: 0; bottom: 10px">
-              <v-btn to='/'><v-icon left>home</v-icon>Home</v-btn>
+							<v-btn round color="error" to='/'><v-icon left>cancel</v-icon>Exit Game</v-btn>
             </v-flex>
           </v-layout>
         </v-toolbar>
@@ -125,10 +125,16 @@
 
 <script>
 import { eventBus } from '../../main'
+import axios from 'axios'
+import { uuid } from 'vue-uuid'
 let module1 = require('../questions/module1.js')
+const config = require('../../../config')
+const isProduction = process.env.NODE_ENV === 'production'
+const backendServer = (isProduction ? config.build.backend : config.dev.backend)
 export default {
 	data () {
 		return {
+			sessionID: '',
 			question: '',
 			comment: '',
 			commentDialog: false,
@@ -179,7 +185,7 @@ export default {
 		choiceSelected (event, index) {
 			// ensure that an answer is not changed
 			if (this.selectedAnswers[this.client].hasOwnProperty([this.questionNumber - 1])) {
-				index = this.selectedAnswers[this.client][this.questionNumber - 1]
+				index = this.selectedAnswers[this.client][this.questionNumber - 1].answer
 			}
 			this.selectedChoice = this.choices[index]
 			this.selectedIndex = index
@@ -240,10 +246,25 @@ export default {
 					this.commentDialog = true
 				}, 250)
 				this.comment = this.selectedChoice.comment
-				this.selectedAnswers[this.client][this.questionNumber - 1] = this.selectedIndex
+				if (!this.selectedAnswers[this.client].hasOwnProperty(this.questionNumber - 1)) {
+					this.selectedAnswers[this.client][this.questionNumber - 1] = {}
+				}
+				this.selectedAnswers[this.client][this.questionNumber - 1].answer = this.selectedIndex
+				this.selectedAnswers[this.client][this.questionNumber - 1].impact = parseInt(this.selectedChoice.impact)
 				let marks = parseInt(this.selectedChoice.impact)
 				this.accummulatedPoints += marks
 				this.changeMood(marks)
+				
+				let formData = new FormData()
+				formData.append('userID', this.$store.state.auth.userID)
+				formData.append('sessionID', this.sessionID)
+				formData.append('module', 1)
+				formData.append('answers', JSON.stringify(this.selectedAnswers))
+				axios.post(backendServer + '/saveAnswers/', formData, {
+					headers: {
+						'Content-Type': 'multipart/form-data'
+					}
+				})
 			}
 			this.selectedChoice = {}
 			this.loadNextQuestion()
@@ -266,7 +287,7 @@ export default {
 			if (
 				this.selectedAnswers[this.client].hasOwnProperty([this.questionNumber - 1])
 			) {
-				this.choiceSelected(this.selectedAnswers[this.client][this.questionNumber - 1])
+				this.choiceSelected(this.selectedAnswers[this.client][this.questionNumber - 1].answer)
 			}
 		},
 		loadNextQuestion () {
@@ -316,29 +337,29 @@ export default {
 
 			// if an answer exist then highligh the answer
 			if (this.selectedAnswers[this.client].hasOwnProperty([this.questionNumber - 1])) {
-				this.choiceSelected(this.selectedAnswers[this.client][this.questionNumber - 1])
+				this.choiceSelected(this.selectedAnswers[this.client][this.questionNumber - 1].answer)
 			}
 			for (let k in this.choices) {
 				k = parseInt(k)
-				if (this.$refs[k] === undefined || this.selectedAnswers[this.client][this.questionNumber - 1] === k) {
+				if (this.$refs[k] === undefined || 
+					(this.selectedAnswers[this.client].hasOwnProperty(this.questionNumber) && this.selectedAnswers[this.client][this.questionNumber - 1].answer === k)) {
 					continue
 				}
 				this.$refs[k][0].isActive = false
 			}
 		},
 		getImgUrl () {
-
-	     	if (this.client === 'clientA') {
+	    if (this.client === 'clientA') {
 				return require('../../assets/images/module1/' + this.clientsImg.clientA + '.jpg')
 			} else if (this.client === 'clientB') {
 				return require('../../assets/images/module1/' + this.clientsImg.clientB + '.jpg')
 			} else if (this.client === 'clientC') {
 				return require('../../assets/images/module1/' + this.clientsImg.clientC + '.jpg')
 			}
-			
 		}
 	},
 	created: function () {
+		this.sessionID = uuid.v4()
 		this.loadNextQuestion()
 	}
 }
