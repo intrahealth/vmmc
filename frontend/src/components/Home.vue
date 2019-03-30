@@ -28,6 +28,10 @@
 								<v-btn to='/Module1' color="primary">Start Module 1</v-btn>
 							</v-flex>
 							<v-spacer></v-spacer>
+							<v-flex xs1>
+								<v-btn to='/Reports' color="primary">View Reports</v-btn>
+							</v-flex>
+							<v-spacer></v-spacer>
 							<v-flex xs2>
 								<v-btn @click="logout" color="primary">Logout</v-btn>
 							</v-flex>

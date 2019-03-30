@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const fs = require('fs');
+const async = require('async')
 const mongoose = require('mongoose');
 const models = require('./models')
 const config = require('./config');
@@ -236,7 +237,7 @@ app.post('/addUser', (req, res) => {
   })
 })
 
-app.post('/saveAnswers', (req, res) => {
+app.post('/saveModule1Answers', (req, res) => {
   const form = new formidable.IncomingForm();
   form.parse(req, (err, fields, files) => {
     if (mongoUser && mongoPasswd) {
@@ -245,13 +246,13 @@ app.post('/saveAnswers', (req, res) => {
       var uri = `mongodb://${mongoHost}:${mongoPort}/${database}`;
     }
     fields.answers = JSON.parse(fields.answers)
+    fields.clientsMood = JSON.parse(fields.clientsMood)
     mongoose.connect(uri, {}, () => {
-      models.answersModel.find({sessionID: fields.sessionID, player: fields.userID}, (err, data) => {
+      models.module1AnswersModel.find({sessionID: fields.sessionID, player: fields.userID}, (err, data) => {
         if(data.length == 0) {
-          const answers = new models.answersModel({
+          const answers = new models.module1AnswersModel({
             player: fields.userID,
             sessionID: fields.sessionID,
-            module: fields.module,
             answers: fields.answers
           })
           answers.save((err, data) => {
@@ -266,9 +267,10 @@ app.post('/saveAnswers', (req, res) => {
             }
           })
         } else {
-          models.answersModel.update({sessionID: fields.sessionID, player: fields.userID}, {
+          models.module1AnswersModel.update({sessionID: fields.sessionID, player: fields.userID}, {
             $set: {
-              answers: fields.answers
+              answers: fields.answers,
+              clientsMood: fields.clientsMood
             }
           }, (err, data) => {
             if (err) {
@@ -284,6 +286,186 @@ app.post('/saveAnswers', (req, res) => {
         }
       })
     })
+  })
+})
+
+app.post('/saveModule2Answers', (req, res) => {
+  const form = new formidable.IncomingForm();
+  form.parse(req, (err, fields, files) => {
+    if (mongoUser && mongoPasswd) {
+      var uri = `mongodb://${mongoUser}:${mongoPasswd}@${mongoHost}:${mongoPort}/${database}`;
+    } else {
+      var uri = `mongodb://${mongoHost}:${mongoPort}/${database}`;
+    }
+    fields.answers = JSON.parse(fields.answers)
+    mongoose.connect(uri, {}, () => {
+      models.module2AnswersModel.find({sessionID: fields.sessionID, player: fields.userID}, (err, data) => {
+        if(data.length == 0) {
+          const answers = new models.module2AnswersModel({
+            player: fields.userID,
+            sessionID: fields.sessionID,
+            answers: fields.answers
+          })
+          answers.save((err, data) => {
+            if (err) {
+              winston.error(err)
+              res.status(500).json({
+                error: "Internal error occured"
+              })
+            } else {
+              winston.info('Answer saved successfully')
+              res.status(200).send()
+            }
+          })
+        } else {
+          models.module2AnswersModel.update({sessionID: fields.sessionID, player: fields.userID}, {
+            $set: {
+              answers: fields.answers,
+              accummulatedPoints: fields.accummulatedPoints
+            }
+          }, (err, data) => {
+            if (err) {
+              winston.error(err)
+              res.status(500).json({
+                error: "Internal error occured"
+              })
+            } else {
+              winston.info('Answer saved successfully')
+              res.status(200).send()
+            }
+          })
+        }
+      })
+    })
+  })
+})
+
+app.get('/getModule1Report', (req, res) => {
+  winston.info('Received a request to get module 1 report')
+  let startDate = req.query.startDate + 'T00:00:00'
+  let endDate = req.query.endDate + 'T23:59:59'
+  let selectedClient = req.query.client
+  
+  models.module1AnswersModel.find({
+    date: {
+      $gte: startDate,
+      $lte: endDate
+    }
+  }, {
+    answers: 1,
+    clientsMood: 1
+  }, (err, answers) => {
+    try {
+      answers = JSON.parse(JSON.stringify(answers))
+    } catch (error) {
+      winston.error(error)
+    }
+    let report = {
+      questionsAssesment: {},
+      clientsMood: {
+        Satisfied: 0,
+        Interested: 0,
+        Neutral: 0,
+        Unsure: 0,
+        Unhappy: 0
+      }
+    }
+    if(answers.length > 0) {
+      async.eachSeries(answers, (answer, nxtAnswer) => {
+        if(answer.hasOwnProperty('clientsMood') && report.clientsMood.hasOwnProperty(answer.clientsMood[selectedClient])) {
+          report.clientsMood[answer.clientsMood[selectedClient]]++
+        }
+        async.eachOfSeries(answer.answers, (client, clientKey, nxtClient) => {
+          if(clientKey != selectedClient) {
+            return nxtClient()
+          }
+          async.eachOfSeries(client, (question, qnKey, nxtQuestion) => {
+            let questionNum = ++qnKey
+            if(!report.questionsAssesment.hasOwnProperty(questionNum)) {
+              report.questionsAssesment[questionNum] = {
+                wrong: 0,
+                correct: 0,
+                neutral: 0
+              }
+            }
+            if(question.impact < 0) {
+              report.questionsAssesment[questionNum].wrong += 1
+            } else if(question.impact > 0) {
+              report.questionsAssesment[questionNum].correct += 1
+            } else {
+              report.questionsAssesment[questionNum].neutral += 1
+            }
+            return nxtQuestion()
+          }, () => {
+            return nxtClient()
+          })
+        }, () => {
+          return nxtAnswer()
+        })
+      }, () => {
+        res.status(200).json(report)
+      })
+    } else {
+      res.status(200).json(report)
+    }
+  })
+})
+
+app.get('/getModule2Report', (req, res) => {
+  winston.info('Received a request to get module 2 report')
+  let startDate = req.query.startDate + 'T00:00:00'
+  let endDate = req.query.endDate + 'T23:59:59'
+  
+  models.module2AnswersModel.find({
+    date: {
+      $gte: startDate,
+      $lte: endDate
+    }
+  }, {
+    answers: 1,
+    accummulatedPoints: 1
+  }, (err, answers) => {
+    try {
+      answers = JSON.parse(JSON.stringify(answers))
+    } catch (error) {
+      winston.error(error)
+    }
+    let report = {
+      questionsAssesment: {},
+      successfulProcedure: 0,
+      failedProcedure: 0
+    }
+    if(answers.length > 0) {
+      async.eachSeries(answers, (answer, nxtAnswer) => {
+        if(answer.hasOwnProperty('accummulatedPoints')) {
+          if(report.accummulatedPoints >= 13) {
+            report.successfulProcedure++
+          } else {
+            report.failedProcedure++
+          }
+        }
+        async.eachOfSeries(answer.answers, (question, qnKey, nxtQuestion) => {
+          if(!report.questionsAssesment.hasOwnProperty(qnKey)) {
+            report.questionsAssesment[qnKey] = {
+              Wrong: 0,
+              Correct: 0
+            }
+          }
+          if(Object.values(question)[0] == 'Wrong') {
+            report.questionsAssesment[qnKey].Wrong += 1
+          } else if(Object.values(question)[0] == 'Correct') {
+            report.questionsAssesment[qnKey].Correct += 1
+          }
+          return nxtQuestion()
+        }, () => {
+          return nxtAnswer()
+        })
+      }, () => {
+        res.status(200).json(report)
+      })
+    } else {
+      res.status(200).json(report)
+    }
   })
 })
 

@@ -62,6 +62,7 @@ export default {
   border: 3px solid #7ce5f8;
   width: 1000px;
   height: auto;
+	min-height: 350px
 }
 #appFooter {
   font-size: 13px;

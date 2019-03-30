@@ -50,7 +50,6 @@
 			</v-card>
 		</template>
 		<template>
-			{{answersTracker}}
 			<v-layout column>
 				<v-flex>
 					<v-toolbar color="#566573">
@@ -86,13 +85,13 @@
 						</div>
 					</div>
 					<div class="questionImg" v-else-if="questionNumber === 8" @click="imageAnswers">
-						<v-img :src="getImgUrl()" v-bind:alt="questionImg" contain max-height="450"></v-img>
+						<v-img :src="getImgUrl()" alt="Question Image" contain max-height="450"></v-img>
 					</div>
 					<div class="questionImg" v-else-if="questionNumber === 9" @click="imageAnswers">
-						<v-img :src="getImgUrl()" v-bind:alt="questionImg" contain max-height="450"></v-img>
+						<v-img :src="getImgUrl()" alt="Question Image" contain max-height="450"></v-img>
 					</div>
 					<div class="questionImg" v-else >
-						<v-img :aspect-ratio="16/9" :src="getImgUrl()" v-bind:alt="questionImg" max-height="450"></v-img>
+						<v-img :aspect-ratio="16/9" :src="getImgUrl()" alt="Question Image" max-height="450"></v-img>
 					</div>
 				</v-flex>
 				<v-flex id="question" height="1" text-sm-left>
@@ -115,13 +114,26 @@
 											<template v-for="(choice,index) in choices">
 												<v-radio-group v-model="selectedParentChoice" @change="choiceSelected()">
 													<label style="cursor: pointer;">
-														<v-radio style="font-weight: bold;color: black" :ref="'choice' + index" :label="choice.choiceText" :value="index" color="red"></v-radio>
+														<v-radio 
+															style="font-weight: bold;color: black" 
+															:ref="'choice' + index" 
+															:label="choice.choiceText" 
+															:value="index" 
+															color="red">
+														</v-radio>
 													</label>
 												</v-radio-group>
                         <template v-if="choice.hasOwnProperty('choices') && showSubChoices" v-for="(pausedChoice,subIndex) in choice.choices">
                           <v-radio-group style="margin-left: 40px" v-model="selectedChildChoice">
                             <label style="cursor: pointer;">
-                              <v-radio :disabled="radioDisabled" style="font-weight: bold;color: black" :ref="'subChoice' + subIndex" :label="pausedChoice.choiceText" :value="subIndex" color="red"></v-radio>
+                              <v-radio 
+																:disabled="radioDisabled" 
+																style="font-weight: bold;color: black" 
+																:ref="'subChoice' + subIndex" 
+																:label="pausedChoice.choiceText" 
+																:value="subIndex" 
+																color="red">
+															</v-radio>
                             </label>
                           </v-radio-group>
                         </template>
@@ -440,9 +452,9 @@ export default {
 				let formData = new FormData()
 				formData.append('userID', this.$store.state.auth.userID)
 				formData.append('sessionID', this.sessionID)
-				formData.append('module', 2)
 				formData.append('answers', JSON.stringify(this.answersTracker))
-				axios.post(backendServer + '/saveAnswers/', formData, {
+				formData.append('accummulatedPoints', this.accummulatedPoints)
+				axios.post(backendServer + '/saveModule2Answers/', formData, {
 					headers: {
 						'Content-Type': 'multipart/form-data'
 					}

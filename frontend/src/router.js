@@ -5,6 +5,7 @@ import VueCookies from 'vue-cookies'
 import Module1 from './components/Game/Module1'
 import Module2 from './components/Game/Module2'
 import Login from './components/Login'
+import Reports from './components/Reports'
 import Logout from './components/Logout'
 import Signup from './components/Signup'
 import Home from './components/Home'
@@ -27,6 +28,11 @@ let router = new Router({
 			path: '/Module2',
 			name: 'Module2',
 			component: Module2
+		},
+		{
+			path: '/Reports',
+			name: 'Reports',
+			component: Reports
 		},
 		{
 			path: '/login',
