@@ -48,7 +48,7 @@ module.exports = {
         "impact": "+1"
       }, {
         "choiceText": "C. Tell him he’s not eligible since he’s already HIV positive.",
-        "comment": "Although he already has HIV, MC can still project against other STDs and is still beneficial for his reproductive health.",
+        "comment": "Although he already has HIV, MC can still protect against other STDs and is still beneficial for his reproductive health.",
         "impact": "-1"
       }],
       "nextMove": 3,
