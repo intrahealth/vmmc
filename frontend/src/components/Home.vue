@@ -38,7 +38,7 @@
 						</v-layout>
 					</v-tab-item>
 					<v-tab-item key="module2Item" class="moduleIntro">
-						In this module you, the player, are asked to perform a dorsal slit circumcision on a 20-year-old male.  At each step of the procedure you must choose the most correct answer to continue with the surgery successfully. Please select an answer from the list and click NEXT to proceed.<br>
+						In this module you, the player, are asked to perform a dorsal slit circumcision on a 20-year-old male.  At each step of the procedure you must choose the most correct answer to continue with the surgery successfully. Please select an answer from the list and click NEXT to proceed. A summary of your answers will be provided at the end of the game.<br>
 						<v-layout row wrap>
 							<v-flex xs1>
 								<v-btn to='/Module2' color="primary">Start Module 2</v-btn>

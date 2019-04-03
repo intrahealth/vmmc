@@ -21,7 +21,12 @@
 								<v-card hover>
 									<v-card-title>
 										<v-toolbar color="purple" style="color: white">
-											Question {{qNumber}}
+											<v-tooltip top>
+												<template slot="activator">
+													Question {{qNumber}}
+												</template>
+												<span>{{moduleQuestions[qNumber-1].situationText}}</span>
+											</v-tooltip>
 										</v-toolbar>
 									</v-card-title>
 									<v-card-text style="text-align: justify">
@@ -49,7 +54,7 @@
 				</v-card-title>
 			</v-card>
 		</template>
-		<template>
+		<template v-else>
 			<v-layout column>
 				<v-flex>
 					<v-toolbar color="#566573">
@@ -66,7 +71,7 @@
 				</v-flex>
 				<v-flex xs4>
 					<div class="questionImg" v-if="questionNumber === 3" @click="imageAnswers" >
-						<v-img  :src="getImgUrl()" v-bind:alt="questionImg"  contain max-height="450"></v-img>
+						<v-img  :src="getImgUrl()" v-bind:alt="questionImg"  contain max-height="450" height="250"></v-img>
 					</div>
 					<div class="questionImg" v-else-if="questionNumber === 4" >
 						<div>ITEMS
@@ -80,18 +85,21 @@
 						<div>
 							BINS
 							<drop class="drop" v-for="question4ImgBin in question4ImgsBins" :key="question4ImgBin.id" @drop="handleDragover(question4ImgBin.title, ...arguments)" >
-								<v-img :src="question4ImgBin.img" v-bind:alt="question4ImgBin.id" contain max-height="100" ></v-img>
+								<v-img :src="question4ImgBin.img" v-bind:alt="question4ImgBin.id" contain max-height="100" height="250" ></v-img>
 							</drop>
 						</div>
 					</div>
 					<div class="questionImg" v-else-if="questionNumber === 8" @click="imageAnswers">
-						<v-img :src="getImgUrl()" alt="Question Image" contain max-height="450"></v-img>
+						<v-img :src="getImgUrl()" alt="Question Image" contain max-height="450" height="250"></v-img>
 					</div>
 					<div class="questionImg" v-else-if="questionNumber === 9" @click="imageAnswers">
-						<v-img :src="getImgUrl()" alt="Question Image" contain max-height="450"></v-img>
+						<v-img :src="getImgUrl()" alt="Question Image" contain max-height="450" height="250"></v-img>
+					</div>
+					<div class="questionImg" v-else-if="questionNumber === 12 || questionNumber === 13" >
+						<v-img :aspect-ratio="16/9" :src="getImgUrl()" alt="Question Image" max-height="450" height="250" width="400"></v-img>
 					</div>
 					<div class="questionImg" v-else >
-						<v-img :aspect-ratio="16/9" :src="getImgUrl()" alt="Question Image" max-height="450"></v-img>
+						<v-img :aspect-ratio="16/9" :src="getImgUrl()" alt="Question Image" max-height="450" height="250"></v-img>
 					</div>
 				</v-flex>
 				<v-flex id="question" height="1" text-sm-left>
@@ -183,6 +191,7 @@ const backendServer = (isProduction ? config.build.backend : config.dev.backend)
 export default {
 	data () {
 		return {
+			moduleQuestions: module2,
 			sessionID: '',
 			radioDisabled: false,
 			question: '',
@@ -342,6 +351,9 @@ export default {
 
 				} else {
 					this.trackAnswers('Correct')
+					this.$store.state.dialogError = true
+	    		this.$store.state.errorTitle = 'Correct'
+	    		this.$store.state.errorDescription = "That is the correct answer"
 				}
 				this.selectedAnswers[this.questionNumber - 1] = {}
 				this.selectedAnswers[this.questionNumber - 1].parentChoice = this.selectedParentChoice
@@ -362,11 +374,11 @@ export default {
 			if (this.questionNumber === 3) {
 				
 		   		this.$store.state.dialogError = true
-	    		this.$store.state.errorTitle = 'That is not correct,below is the correct answer'
+	    		this.$store.state.errorTitle = 'That is not correct, below is the correct answer'
 	    		this.$store.state.errorDescription = "The Dorsal Penile nerves at 1 o'clock and 11 o'clock Positions " 
 			} else if (this.questionNumber === 8) {
 				this.$store.state.dialogError = true
-	    		this.$store.state.errorTitle = 'That is not correct,below is the correct answer'
+	    		this.$store.state.errorTitle = 'That is not correct, below is the correct answer'
 	    		this.$store.state.errorDescription = "The Points at 3 o'clock and 9 o'clock Positions "
 			} else {
 				for (let choice of this.choices) {
@@ -393,7 +405,7 @@ export default {
 				}
 
 				this.$store.state.dialogError = true
-				this.$store.state.errorTitle = 'That is not correct,below is the correct answer'
+				this.$store.state.errorTitle = 'That is not correct, below is the correct answer'
 				this.$store.state.errorDescription = correctAnswer
 			}
 		},
@@ -532,7 +544,7 @@ export default {
 		    	if (Object.values(this.answersTracker[this.questionNumber]).indexOf('Wrong') > -1) {
 				    this.$store.state.dialogError = true
 			    	this.$store.state.errorTitle = 'Wrong'
-			        this.$store.state.errorDescription = "A Wrong Value exist"
+			        this.$store.state.errorDescription = "An incorrect bin was chosen, a summary of your responses is given at the end of the game."
 				} else {
 					this.accummulatedPoints++
 				}
@@ -655,7 +667,7 @@ export default {
 			   		if (this.questionNumber === 3) {
 			   			if (this.answersTracker[this.questionNumber]['A'] === "Wrong" || this.answersTracker[this.questionNumber]['B'] === "Wrong"){
 					   		this.$store.state.dialogError = true
-				    		this.$store.state.errorTitle = 'That is not correct,below is the correct answer'
+				    		this.$store.state.errorTitle = 'That is not correct, below is the correct answer'
 				    		this.$store.state.errorDescription = "The Dorsal Penile nerves at 1 o'clock and 11 o'clock Positions " 
 			    		} else {
 			    			this.accummulatedPoints++
@@ -663,7 +675,7 @@ export default {
 				   	} else {
 				   		if (this.answersTracker[this.questionNumber]['A'] === "Wrong" || this.answersTracker[this.questionNumber]['B'] === "Wrong"){
 					   		this.$store.state.dialogError = true
-				    		this.$store.state.errorTitle = 'That is not correct,below is the correct answer'
+				    		this.$store.state.errorTitle = 'That is not correct, below is the correct answer'
 				    		this.$store.state.errorDescription = "The Points at 3 o'clock and 9 o'clock Positions "
 				    	} else {
 				    		this.accummulatedPoints++

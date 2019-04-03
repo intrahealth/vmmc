@@ -61,7 +61,7 @@
 				</v-flex>
 				<v-flex xs4>
 					<div class="clientImg">
-						<v-img :aspect-ratio="16/9" :src="getImgUrl()" v-bind:alt="client" max-height="450"></v-img>
+						<v-img :aspect-ratio="16/9" :src="getImgUrl()" v-bind:alt="client" max-height="450" height="200"></v-img>
 					</div>
 				</v-flex>
 				<v-flex id="question" height="1" v-show='!loadingNextClient' text-sm-left>
