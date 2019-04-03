@@ -141,14 +141,14 @@ module.exports = {
 	'5': {
 		'situationText': 'How many minutes after injection do you wait before beginning the procedure?',
 		'choices': [{
-			'choiceText': 'A. 3 minutes',
+			'choiceText': 'A. 3-5 minutes',
 			'comment': '',
 			'correct': 'yes',
 			'impact': 1,
 			'bonus': 0
 		},
 		{
-			'choiceText': 'B. 5 minutes',
+			'choiceText': 'B. 6 minutes',
 			'comment': '',
 			'correct': 'no',
 			'impact': 0,
