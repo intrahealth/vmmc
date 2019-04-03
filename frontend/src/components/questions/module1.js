@@ -122,7 +122,7 @@ module.exports = {
         "impact": "0"
       }, {
         "choiceText": "He can ride his bicycle after ten days.",
-        "comment": "his advice will deter clients of VMMC services especially those who use bicycle frequently.",
+        "comment": "His advice will deter clients of VMMC services especially those who use bicycle frequently.",
         "impact": "-1"
       }],
       "nextMove": 2,
