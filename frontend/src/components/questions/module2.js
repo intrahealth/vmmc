@@ -36,14 +36,14 @@ module.exports = {
 	'1': {
 		'situationText': 'The client’s skin has now been prepped and properly draped.  You are ready to administer the anesthesia.  Your assistant hands you the needle and vial.  You…',
 		'choices': [{
-			'choiceText': 'A. You take the appropriate amount of anesthetic into the needle and inject at the site of the twin dorsal nerves',
+			'choiceText': 'A. Take the appropriate amount of anesthetic into the needle and inject at the site of the twin dorsal nerves',
 			'comment': '',
 			'correct': 'no',
 			'impact': 0,
 			'bonus': 0
 		},
 		{
-			'choiceText': 'B. You check the vial of anesthetic to ensure the correct agent at the correct concentration has been selected.',
+			'choiceText': 'B. Check the vial of anesthetic to ensure the correct agent at the correct concentration has been selected.',
 			'comment': '',
 			'correct': 'no',
 			'impact': 0,
