@@ -52,18 +52,18 @@ let router = new Router({
 	]
 })
 
-router.beforeEach((to, from, next) => {
-  if (!store.state.auth.token && (!VueCookies.get('token') || !VueCookies.get('userID'))) {
-    if (to.path !== '/Login' && to.path !== '/Signup') {
-      next({
-        path: '/Login'
-      })
-    } else {
-      next()
-    }
-  } else {
-    next()
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   if (!store.state.auth.token && (!VueCookies.get('token') || !VueCookies.get('userID'))) {
+//     if (to.path !== '/Login' && to.path !== '/Signup') {
+//       next({
+//         path: '/Login'
+//       })
+//     } else {
+//       next()
+//     }
+//   } else {
+//     next()
+//   }
+// })
 
 export default router

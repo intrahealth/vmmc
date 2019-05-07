@@ -24,7 +24,9 @@ const server = require('http').createServer(app);
 let jwtValidator = function (req, res, next) {
   if (req.method == "OPTIONS" ||
     req.path == "/authenticate/" ||
-    req.path == "/addUser/"
+    req.path == "/addUser/" ||
+    req.path == "/getModule1Report" ||
+    req.path == "/getModule2Report"
   ) {
     return next()
   }
