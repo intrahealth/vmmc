@@ -63,7 +63,7 @@ let jwtValidator = function (req, res, next) {
   }
 }
 
-app.use(jwtValidator)
+//app.use(jwtValidator)
 app.use(bodyParser.urlencoded({
   extended: true,
 }));
@@ -195,7 +195,7 @@ app.post('/addUser', (req, res) => {
     } else {
       var uri = `mongodb://${mongoHost}:${mongoPort}/${database}`;
     }
-    
+
     mongoose.connect(uri, {}, () => {
       models.RolesModel.find({
         name: "Player"
@@ -247,13 +247,17 @@ app.post('/saveModule1Answers', (req, res) => {
     } else {
       var uri = `mongodb://${mongoHost}:${mongoPort}/${database}`;
     }
+
     fields.answers = JSON.parse(fields.answers)
     fields.clientsMood = JSON.parse(fields.clientsMood)
+
+    console.log("Fields");
+    console.log(fields);
+
     mongoose.connect(uri, {}, () => {
       models.module1AnswersModel.find({sessionID: fields.sessionID, player: fields.userID}, (err, data) => {
-        if(data.length == 0) {
+        if (typeof data == "undefined" || data.length == 0) {
           const answers = new models.module1AnswersModel({
-            player: fields.userID,
             sessionID: fields.sessionID,
             answers: fields.answers
           })
@@ -347,7 +351,7 @@ app.get('/getModule1Report', (req, res) => {
   let startDate = req.query.startDate + 'T00:00:00'
   let endDate = req.query.endDate + 'T23:59:59'
   let selectedClient = req.query.client
-  
+
   models.module1AnswersModel.find({
     date: {
       $gte: startDate,
@@ -417,7 +421,7 @@ app.get('/getModule2Report', (req, res) => {
   winston.info('Received a request to get module 2 report')
   let startDate = req.query.startDate + 'T00:00:00'
   let endDate = req.query.endDate + 'T23:59:59'
-  
+
   models.module2AnswersModel.find({
     date: {
       $gte: startDate,

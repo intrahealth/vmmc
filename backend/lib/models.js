@@ -7,7 +7,7 @@ let Roles = new mongoose.Schema({
     required: true,
     unique: true
   }
-})
+});
 
 let Users = new mongoose.Schema({
   firstName: {
@@ -42,12 +42,13 @@ let Users = new mongoose.Schema({
   lastModified: {
     type: Date
   }
-})
+});
+
 let module1Answers = new mongoose.Schema({
   player: {
     type: Schema.Types.ObjectId,
     ref: 'Users',
-    required: true
+    required: false
   },
   sessionID: {
     type: String,
@@ -63,7 +64,7 @@ let module1Answers = new mongoose.Schema({
   clientsMood: {
     type: Object
   }
-})
+});
 
 let module2Answers = new mongoose.Schema({
   player: {
@@ -85,15 +86,16 @@ let module2Answers = new mongoose.Schema({
   accummulatedPoints: {
     type: Number
   }
-})
+});
 
-let RolesModel = mongoose.model('Roles', Roles)
-let UsersModel = mongoose.model('Users', Users)
-let module1AnswersModel = mongoose.model('module1Answers', module1Answers)
-let module2AnswersModel = mongoose.model('module2Answers', module2Answers)
+let RolesModel = mongoose.model('Roles', Roles);
+let UsersModel = mongoose.model('Users', Users);
+let module1AnswersModel = mongoose.model('module1Answers', module1Answers);
+let module2AnswersModel = mongoose.model('module2Answers', module2Answers);
+
 module.exports = {
   UsersModel,
   RolesModel,
   module1AnswersModel,
   module2AnswersModel
-}
+};
