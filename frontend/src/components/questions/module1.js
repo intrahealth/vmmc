@@ -114,15 +114,15 @@ module.exports = {
       "situationText": "Zabron, aged 27 years old, HIV negative, married with two children, tells you that he needs MC services and he has got work permission for ten days only; he is afraid of losing a job as he might require two weeks for complete healing. You:",
       "choices": [{
         "choiceText": "Tell him that it’s true that he need two weeks and hence he might lose his job.",
-        "comment": "This information is not correct and will dissuade client from pursuing the procedure",
+        "comment": "This is incorrect.  It takes up to seven days for superficial healing of the wound  and six weeks for complete wound healing.As a health care provider you should advise your client with correct information that after seven days he  can return  to job  but he needs to avoid strenous work or lifting heavy objects which might result to wound disruption.",
         "impact": "-1"
       }, {
         "choiceText": "You inform him that he only need 5-7 days for superficial healing process. So, ten days are enough, and he can have MC procedure.",
-        "comment": "Providing clients with a realistic timeframe is best.",
+        "comment": "Correct, the health care provider should encourage the client to proceed with the MC since he has enough time to achieve superficial healing before resuming work.",
         "impact": "+1"
       }, {
         "choiceText": "Tell him to return to work and ask for two weeks permission.",
-        "comment": "This may dissuade the client from considering the procedure.  The healing will be well advanced after 7 days and one can return to normal activities.",
+        "comment": "As a  health care provider you  should avoid discouraging eligible clients to undergo MC procedure, by providing correct informations that within the  two weeks the healing will be advanced and the client can resume his job and normal activities. Providing the client with the correct information will enable him to make an informed decisions.",
         "impact": "0"
       }],
       "nextMove": 1,
@@ -132,15 +132,15 @@ module.exports = {
       "situationText": "Many clients use bicycles/ motorcycles as the means of transport and source of income. Zabron is worried of his family income as he is doing business of bicycle taxi (bodaboda). As the counselor you advise him that he will return shortly to his business. You will tell your clients after circumcision that:",
       "choices": [{
         "choiceText": "He should not ride a bicycle for the first three days after operation",
-        "comment": "This is the advice providers should give.",
+        "comment": "Correct, the clients should be advised to continue riding their bicycles afer the first follow up visit usually Day two (48 hrs) following surgery , because during this time he is expected to have returned to the facility/outreach site for assessment of the wound and routine check up.",
         "impact": "+1"
       }, {
         "choiceText": "He can ride his bicycle after 24 hours after circumcision.",
-        "comment": "Not advisable as it increases pelvic pressure and leads to untying of sutures hence bleeding.",
+        "comment": "This is incorrect. By increasing  pressure on a fresh wound this might lead to untying of the suture and bleeding.",
         "impact": "0"
       }, {
         "choiceText": "He can ride his bicycle after ten days.",
-        "comment": "His advice will deter clients of VMMC services especially those who use bicycle frequently.",
+        "comment": "Incorrect. The client can ride his bicycle after 3 days, as we expect he should have by then attended the 48 hrs post op . The wound assessed and bandage removed.",
         "impact": "-1"
       }],
       "nextMove": 2,
@@ -150,38 +150,74 @@ module.exports = {
       "situationText": "Zabron is also worried about the risks of the procedure. He has never had surgery before and is concerned about complications. You will tell your client: ",
       "choices": [{
         "choiceText": "There are no risks associated with circumcision.",
-        "comment": "While the adverse event rates are low, there are risks associated with the procedure and it’s important to educate the client honestly without increasing fear.",
+        "comment": "Incorrect. During the health education and individual counseling ,clients should be informed that although rare but adverse events do occur, the adverse events which might occur include pain ( which increases in severity) , bleeding , swelling of the penis and failure to pass urine. The health care provider should use this opportunity to explain to the client that if he experiences one of the adverse events he should return back to the facility/outreach site for further evaluations. The health provider should ensure the emmergency contact no is filled in the Client appointment card.",
         "impact": "-1"
       }, {
         "choiceText": "There are risks associated with circumcision, but the chances of these occurring are very rare.",
-        "comment": "While the explanation is accurate, it’s best to include specifics about the risks including pain, infection, swelling, and delayed healing, so the client is well informed.",
+        "comment": "Incorrect, though its true the risks associated with circumcision (Adverse events) rarely occur, but precautions should be taken and the client should return back to the facility/outreach site for further evaluations and management.",
         "impact": "0"
       }, {
         "choiceText": "In addition to the many benefits of circumcision there are a few risks. These are unlikely but may include pain, infection or hematoma which is a blood clot under the skin.",
-        "comment": "his answer incorporates mentioning the benefits of circumcision while accurately reflecting the possible risks.",
+        "comment": "This is correct, it is important explain the risks which might occur following circumcision such as pain( especially if it increases with severity) infection, bleeding hematoma and failure to pass urine.",
         "impact": "+1"
       }],
       "nextMove": 3,
       "prevMove": 1
     },
     "3": {
+      "situationText": "Zabron asks if circumcision will also reduce his wife’s chances of getting HIV. You will tell your client:",
+      "choices": [{
+        "choiceText": "Women cannot be protected against HIV.",
+        "comment": "The client should be educated on possible HIV preventive measures for women, that is ABC approach, avoiding sharps and needle sharing and he should be counseled on gender equality and promoting women on making informed choices on their health including condom negotiation. Also the client should be educated on benefits of circumcision in reducing  HPV transmission which leads to cervical cancer.",
+        "impact": "-1"
+      }, {
+        "choiceText": "The best way to reduce your wife’s chances of getting HIV is for both partners to follow the ABCs- Abstinence, being faithful, condoms. Circumcision reduces your chances of contracting HIV but if you do get it, you can still pass it along to your partner.",
+        "comment": "Excellent, the client should be educated on possible HIV preventive measures for women, that is ABC approach, avoiding sharps and needle sharing and he should be counseled on gender equality and promoting women on making informed choices on their health including condom negotiation. Also the client should be educated on benefits of circumcision in reducing  HPV transmission which leads to cervical cancer.",
+        "impact": "+1"
+      }, {
+        "choiceText": "Male circumcision does not protect women from HIV.",
+        "comment": "The client should be educated on possible HIV preventive measures for women, that is ABC approach, avoiding sharps and needle sharing and he should be counseled on gender equality and promoting women on making informed choices on their health including condom negotiation. Also the client should be educated on benefits of circumcision in reducing  HPV transmission which leads to cervical cancer.",
+        "impact": "0"
+      }],
+      "nextMove": 4,
+      "prevMove": 2
+    },
+    "4": {
       "situationText": "Zabron says he has 2 sons (a 4-year-old and a 12-year-old) and he wants to know if he should bring them in for VMMC. You will tell your client: ",
       "choices": [{
         "choiceText": "The 12-year-old child should be brought in for circumcision.",
-        "comment": "The 12-year-old child could be brought to the clinic for circumcision because is within the eligible age category for VMMC. The recommended age for circumcision in the VMMC program boys 10 years old and older. ",
+        "comment": "This is correct, the client should be told that the 12-year-old child can be brought to the clinic for circumcision because he is within the eligible age category for Voluntary Medical Male Circumcision. The recommended age for circumcision in the VMMC program is for boys 10 years and older. This is the recommended age because they have attained their puberty and are at risk of contracting HIV infection through heterosexual intercourse.",
         "impact": "+1"
       }, {
         "choiceText": "A 4-year-old child can be brought in for VMMC services.",
-        "comment": "child under 10 cannot be circumcised under this program, VMMC services are for those who are at higher risk of acquiring HIV through heterosexual transmission. ",
+        "comment": "This is incorrect, the client should be told that the 12-year-old child can be brought to the clinic for circumcision because he is within the eligible age category for Voluntary Medical Male Circumcision. The recommended age for circumcision in the VMMC program is for boys 10 years and older. This is the recommended age because they have attained their puberty and are at risk of contracting HIV infection through heterosexual intercourse. Tell the client that the 4 year boy can still undergo circumcision through other routine service delivery procedure at a given health facility but not under VMMC program.",
         "impact": "0"
       }, {
         "choiceText": "All children are sexually active; therefore, they need to be offered VMMC",
-        "comment": "This is untrue. The VMMC services are offered to boys 10 years old and older, and who are considered to be sexually active.",
+        "comment": "This is incorrect, the client should be told that the 12-year-old child can be brought to the clinic for circumcision because he is within the eligible age category for Voluntary Medical Male Circumcision. The recommended age for circumcision in the VMMC program is for boys 10 years and older. This is the recommended age because they have attained their puberty and are at risk of contracting HIV infection through heterosexual intercourse. Tell the client that the 4 year boy can still undergo circumcision through other routine service delivery procedure at a given health facility but not under VMMC program.",
         "impact": "-1"
       }],
-      "nextMove": "clientC",
-      "prevMove": 2
-    }
+      "nextMove": 5,
+      "prevMove": 3
+    },
+    "5": {
+      "situationText": "Zabron says he wants to have more children as soon as possible and would therefore like to resume sexual intercourse with his wife as soon as he returns from the circumcision procedure. You will tell your client:",
+      "choices": [{
+        "choiceText": "It takes 6 weeks for the circumcision wound to become strong enough to withstand gentle intercourse and recommends that he waits this period to avoid infection or other complications.",
+        "comment": "Excellent, the provider must emphasize to the client that he must abstain from sexual activity throughout the healing period. It is very important that clients understand the commitment to abstinence. Healing takes about 6 weeks for adults and adolescents. No sexual activity may occur for 6 weeks after surgery. Sexual activity within 6 weeks of surgery can damage the wound, extend the healing period, and may lead to serious complications such as bleeding and hematoma and increases the risk of HIV transmission and acquisition. Remind the client that once he resume to sexual intercourse, he must use condom appropriately and consistently for the first 6 month following MC.",
+        "impact": "+1"
+      }, {
+        "choiceText": "It is best to wait 3-4 months to resume intercourse.",
+        "comment": "This is incorrect, the provider must emphasize to the client that he must abstain from sexual activity throughout the healing period. It is very important that clients understand the commitment to abstinence. Healing takes about 6 weeks for adults and adolescents. No sexual activity may occur for 6 weeks after surgery. Sexual activity within 6 weeks of surgery can damage the wound, extend the healing period, and may lead to serious complications such as bleeding and haematoma and increases the risk of HIV transmission and acquisition. Remind the client that once he resume to sexual intercourse, he must use condom appropriately and consistently for the first 6 month following MC.",
+        "impact": "-1"
+      }, {
+        "choiceText": "It takes 4-6 weeks for the circumcision wound to be strong enough for intercourse so it’s best to masturbate in the meantime.",
+        "comment": "This is incorrect, masturbation is not allowed for the first 6 weeks after MC. The provider must emphasize to the client that he must abstain from sexual activity throughout the healing period. It is very important that clients understand the commitment to abstinence. Healing takes about 6 weeks for adults and adolescents. No sexual activity may occur for 6 weeks after surgery. Sexual activity within 6 weeks of surgery can damage the wound, extend the healing period, and may lead to serious complications such as bleeding and haematoma and increases the risk of HIV transmission and acquisition. Remind the client that once he resume to sexual intercourse, he must use condom appropriately and consistently for the first 6 month following MC.",
+        "impact": "0"
+      }],
+      "nextMove": 6,
+      "prevMove": 4
+    },
   },
   "clientC": {
     "0": {
