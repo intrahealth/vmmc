@@ -125,13 +125,13 @@
         <v-toolbar color="primary">
           <v-layout row wrap>
             <v-flex xs3 style="color: white" text-sm-left v-if="clientsStatus.clientA === 'done'">
-              Client A: <label class='clientMoodStatus'>{{clientsMood.clientA}}</label>
+              Amani: <label class='clientMoodStatus'>{{clientsMood.clientA}}</label>
             </v-flex>
             <v-flex xs3 style="color: white" text-xs-center v-if="clientsStatus.clientB === 'done'">
-              Client B: <label class='clientMoodStatus'>{{clientsMood.clientB}}</label>
+              Zabron: <label class='clientMoodStatus'>{{clientsMood.clientB}}</label>
             </v-flex>
             <v-flex xs3 style="color: white" text-sm-right v-if="clientsStatus.clientC === 'done'">
-              Client C: <label class='clientMoodStatus'>{{clientsMood.clientC}}</label>
+              Anold: <label class='clientMoodStatus'>{{clientsMood.clientC}}</label>
             </v-flex>
             <v-flex xs3 style="position: absolute; right: 0; bottom: 10px">
 							<v-btn round color="error" to='/'><v-icon left>cancel</v-icon>Exit Game</v-btn>

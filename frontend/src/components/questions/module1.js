@@ -1,7 +1,7 @@
 module.exports = {
   "clientA": {
     "0": {
-      "situationText": "A 20-year-old male (Client A) from a neighboring village comes to the VMMC campaign.  He’s been waiting all day for his turn for individual counseling.  You greet the client respectively and with kindness.  You introduce yourself and ask for the name of the client.  What is your next step?",
+      "situationText": "A 20-year-old male (Amani) from a neighboring village comes to the VMMC campaign.  He’s been waiting all day for his turn for individual counseling.  You greet the client respectively and with kindness.  You introduce yourself and ask for the name of the client.  What is your next step?",
       "choices": [{
         "choiceText": "A. Ask the client if his caretaker/parent would like to participate",
         "comment": "Client might be slightly offended",
@@ -19,7 +19,7 @@ module.exports = {
       "prevMove": null
     },
     "1": {
-      "situationText": "Client A interrupts your explanation of the circumcision procedure to ask you some questions.  He tells you he’s worried that MC will cause infertility.  You:",
+      "situationText": "Amani interrupts your explanation of the circumcision procedure to ask you some questions.  He tells you he’s worried that MC will cause infertility.  You:",
       "choices": [{
         "choiceText": "A. Laugh a little and tell the client not to ask such silly questions before explaining the facts about MC.",
         "comment": "Provider is not being respectful.",
@@ -37,7 +37,7 @@ module.exports = {
       "prevMove": 0
     },
     "2": {
-      "situationText": "Client A tells you he is HIV positive.  How do you respond?",
+      "situationText": "Amani tells you he is HIV positive.  How do you respond?",
       "choices": [{
         "choiceText": "A. Tell him sorry but you cannot risk you and the other health workers’ safety by performing surgery on an HIV+ client.",
         "comment": "Any increased risk in performing MC on an HIV+ client can be mitigated through correct safety protocols.",
@@ -73,7 +73,7 @@ module.exports = {
       "prevMove": 2
     },
     "4": {
-      "situationText": "Client A is now on ARV; though he has been cleared for VMMC procedure, he is worried about delayed wound healing time due to his HIV status.",
+      "situationText": "Amani is now on ARV; though he has been cleared for VMMC procedure, he is worried about delayed wound healing time due to his HIV status.",
       "choices": [{
         "choiceText": "You tell client that he will heal normally as other HIV negative clients; it will take up seven days for superficial wound healing and six weeks for complete wound healing.",
         "comment": "Providers should use this opportunity to insist on adherence to ARV drugs, post op wound care to facilitate healing and return visits.",
@@ -93,7 +93,7 @@ module.exports = {
   },
   "clientB": {
     "0": {
-      "situationText": "Client B, aged 27 years old, HIV negative, married with two children, tells you that he needs MC services and he has got work permission for ten days only; he is afraid of losing a job as he might require two weeks for complete healing. You:",
+      "situationText": "Zabron, aged 27 years old, HIV negative, married with two children, tells you that he needs MC services and he has got work permission for ten days only; he is afraid of losing a job as he might require two weeks for complete healing. You:",
       "choices": [{
         "choiceText": "Tell him that it’s true that he need two weeks and hence he might lose his job.",
         "comment": "This information is not correct and will dissuade client from pursuing the procedure",
@@ -111,7 +111,7 @@ module.exports = {
       "prevMove": "clientA"
     },
     "1": {
-      "situationText": "Many clients use bicycles/ motorcycles as the means of transport and source of income. Client B is worried of his family income as he is doing business of bicycle taxi (bodaboda). As the counselor you advise him that he will return shortly to his business. You will tell your clients after circumcision that:",
+      "situationText": "Many clients use bicycles/ motorcycles as the means of transport and source of income. Zabron is worried of his family income as he is doing business of bicycle taxi (bodaboda). As the counselor you advise him that he will return shortly to his business. You will tell your clients after circumcision that:",
       "choices": [{
         "choiceText": "He should not ride a bicycle for the first three days after operation",
         "comment": "This is the advice providers should give.",
@@ -129,7 +129,7 @@ module.exports = {
       "prevMove": 0
     },
     "2": {
-      "situationText": "Client B is also worried about the risks of the procedure. He has never had surgery before and is concerned about complications. You will tell your client: ",
+      "situationText": "Zabron is also worried about the risks of the procedure. He has never had surgery before and is concerned about complications. You will tell your client: ",
       "choices": [{
         "choiceText": "There are no risks associated with circumcision.",
         "comment": "While the adverse event rates are low, there are risks associated with the procedure and it’s important to educate the client honestly without increasing fear.",
@@ -147,7 +147,7 @@ module.exports = {
       "prevMove": 1
     },
     "3": {
-      "situationText": "Client B says he has 2 sons (a 4-year-old and a 12-year-old) and he wants to know if he should bring them in for VMMC. You will tell your client: ",
+      "situationText": "Zabron says he has 2 sons (a 4-year-old and a 12-year-old) and he wants to know if he should bring them in for VMMC. You will tell your client: ",
       "choices": [{
         "choiceText": "The 12-year-old child should be brought in for circumcision.",
         "comment": "The 12-year-old child could be brought to the clinic for circumcision because is within the eligible age category for VMMC. The recommended age for circumcision in the VMMC program boys 10 years old and older. ",
