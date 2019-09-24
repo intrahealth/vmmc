@@ -4,15 +4,15 @@ module.exports = {
       "situationText": "A 20-year-old male (Amani) from a neighboring village comes to the VMMC campaign.  He’s been waiting all day for his turn for individual counseling.  You greet the client respectively and with kindness.  You introduce yourself and ask for the name of the client.  What is your next step?",
       "choices": [{
         "choiceText": "A. Ask the client if his caretaker/parent would like to participate",
-        "comment": "Client might be slightly offended",
+        "comment": "The client might be slightly offended to ask immediately if he'd like to participate. It is recommended that as the next step that you ask the client what he already knows and learn what is the client's level of understanding. Provide counseling and any vital information before you ask if he'd like to participate.",
         "impact": "-1"
       }, {
         "choiceText": "B. Begin talking about circumcision procedure.",
-        "comment": "Did not ask client if they had questions before jumping to the procedure, may miss gaps in knowledge or bypass vital information",
+        "comment": "It is recommended that as the next step that you ask the client what he already knows to have and learn what is the client's level of understanding before jumping to the procedure. Provide counseling and any vital information so there are no information gaps.",
         "impact": "-1"
       }, {
         "choiceText": "C. Ask the client to tell you what he already knows about male circumcision.",
-        "comment": "This gives a provider an opportunity to learn about the client’s level of understanding and any information gaps",
+        "comment": "That is excellent. It is recommended that as the next step that you ask the client what he already knows and learn about the client's level of understanding. Provide counseling and any vital information so there are no information gaps.",
         "impact": "+1"
       }],
       "nextMove": 1,
@@ -22,15 +22,15 @@ module.exports = {
       "situationText": "Amani interrupts your explanation of the circumcision procedure to ask you some questions.  He tells you he’s worried that MC will cause infertility.  You:",
       "choices": [{
         "choiceText": "A. Laugh a little and tell the client not to ask such silly questions before explaining the facts about MC.",
-        "comment": "Provider is not being respectful.",
+        "comment": "As a health care provider, you want to understand the client’s thinking about popular myths so that they can be addressed. The client does not know what is true or not. Your role is to provide respectful care to help the client understand the facts about the procedure and how it relates to sexual and reproductive health.",
         "impact": "-1"
       }, {
         "choiceText": "B. Ask the client more about why they think this way.",
-        "comment": "By asking questions you understand more about the client’s thinking and popular myths in the area that may need to be addressed in group education.",
+        "comment": "Excellent. As a health care provider, you want to understand the client’s thinking around popular myths so that they can be addressed. The client does not know what is true or not. Your role is to provide respectful care to help the client understand the facts about the procedure and how it relates to sexual and reproductive health.",
         "impact": "+1"
       }, {
         "choiceText": "C. Respond that MC does not cause infertility before moving on.",
-        "comment": "While you corrected misinformation, missed opportunity to talk about sexual and reproductive health with your client.",
+        "comment": "It is good that you corrected the misinformation yet it was a missed opportunity to talk about sexual and reproductive health. As a health provider, you want to understand the client’s thinking around popular myths so that they can be addressed. Your role is to provide respectful care to help the client understand the facts about the procedure and also how it relates to sexual and reproductive health.",
         "impact": "0"
       }],
       "nextMove": 2,
@@ -40,15 +40,15 @@ module.exports = {
       "situationText": "Amani tells you he is HIV positive.  How do you respond?",
       "choices": [{
         "choiceText": "A. Tell him sorry but you cannot risk you and the other health workers’ safety by performing surgery on an HIV+ client.",
-        "comment": "Any increased risk in performing MC on an HIV+ client can be mitigated through correct safety protocols.",
+        "comment": "According to the National HTS guidelines if a clients test HIV positive, he/she should receive post test counselling for HIV+ persons and VMMC considerations becomes secondary. Clients are offered support for the new HIV diagnosis and linked to Care and Treatment clinics. Once enrolled and initial management has been done, the client will then attend VMMC clinic for male circumcision and correct information given that the circumcision will not provide the 60% protection against HIV infection in HIV positive persons",
         "impact": "-1"
       }, {
         "choiceText": "B. Try to find out more about his understanding of MC and why he is seeking services.",
-        "comment": "This is a great opportunity to reduce stigma and gather more information before taking the next step in service provision.",
+        "comment": "Correct, The role of the health care provider in HIV/AIDS interventions is to reduce stigma and discrimination against HIV/AIDS services and increase knowledge and awareness among the community members, it's a good thing you tried to gather more information about his understanding of MC and HIV prevention and correct any myths/misconceptions which exist in the community.",
         "impact": "+1"
       }, {
         "choiceText": "C. Tell him he’s not eligible since he’s already HIV positive.",
-        "comment": "Although he already has HIV, MC can still protect against other STDs and is still beneficial for his reproductive health.",
+        "comment": "As a health care provider, you should provide clear and correct informations that although he is already HIV positive MC will not offer protection against HIV but there are other benefits which the client will get if he undergoes Male circumcision. Other benefits include reducing the risk of becoming infected with other STIs like Chancroid and Syphilis, lowering the risk of penile cancers in men, and reducing the cervical cancers rate and HPV infection to their women.",
         "impact": "-1"
       }],
       "nextMove": 3,
@@ -58,37 +58,55 @@ module.exports = {
       "situationText": "You explain that MC does not protect partners from contracting HIV and then you ask if he is receiving treatment at the Care and Treatment Centre (CTC). What next?",
       "choices": [{
         "choiceText": "A. The client tells you he is receiving CTC services so you tell him you can perform the circumcision.",
-        "comment": "Missed opportunity to discuss ART adherence and information on VMMC’s impact on STI protection and hygiene promotion, additionally CD4 counts are necessary before performing surgical procedures.",
+        "comment": "This is a great opportunity to provide additional information and counseling to the HIV positive clients that MC will not provide protective effect to partners of HIV positive clients, but Circumcision will provide other benefits including protection against other STIs, risk of penile cancers as well as reducing the rates of cervical cancers in their women. During the ongoing counseling it is also a great opportunity to discuss on ART adherence as well as routine monitoring of his health status in the Care and Treatment clinics",
         "impact": "-1"
       }, {
         "choiceText": "B. The client tells you he is not receiving CTC services so you tell him you cannot perform the circumcision.",
-        "comment": "Missed opportunity to refer client to CTC services. Additionally, missed opportunity to explain that MC will not provide benefit to HIV status but can protect against STIs. Additionally, you must explain that if he would like the surgery he can bring his CD4 count.",
+        "comment": "During the ongoing counselling session, Inform the client the importance of attending the Care and Treatment clinic for further management of his HIV status and initiation of ARVs. The Male Circumcision becomes secondary, take this opportunity to refer and link the client to the nearby CTC clinic and ensure enrollment by escoritng the client. After the client has been enrolled provide an appointment for MC in a later date.",
         "impact": "-1"
       }, {
         "choiceText": "C. The client tells you he is receiving CTC and you ask him to bring documentation of his last CD4 count before the surgical procedure.",
-        "comment": "Although the CD4 count is necessary before a surgical procedure, the client has already waited all day for the surgery. It is best to provide assistance in gathering CD4 count and make arrangements for the client to return for his surgery. Additionally, do not forget to provide ART adherence reminders and explain that MC will not impact his HIV status but it can help protect against STIs.",
+        "comment": "The availability of the CTC card is not a mandatory before the surgical procedure, as long as the client has provided assurance that he is already enrolled at CTC and possesses a CTC card. It is advised to continue providing VMMC services and avoid to make the client wait for longer periods of time. After providing the VMMC services remind the client the importance of ART adherence and attending CTC and maintaining proper hygiene.",
         "impact": "0"
       }],
       "nextMove": 4,
       "prevMove": 2
     },
     "4": {
+      "situationText": "Amani returns with his CTC card. What additional counseling do you need to provide before the procedure?",
+      "choices": [{
+        "choiceText": "Information on risks of surgery, discussion on partner risks and wound care.",
+        "comment": "In a calm, informative tone the health care provider should assist the client to have all the necessary informations before surgery.The discussion should focus on educating the clients on potential surgical risks, importance of hygiene and proper post operative wound care and other HIV prevention strategies i.e A-Abstinence, B-Being faithful C- Consinstent Correct use of condoms.",
+        "impact": "+1"
+      }, {
+        "choiceText": "Information on risks of surgery and wound care.",
+        "comment": "The counseling information provided to all clients is the same regardless of the HIV status. As a health care provider, you should provide accurate informations concerning the minor complications which might arise following surgery such as pain and bleeding. Importance of wound care and hygiene. The information provided to the HIV positive client does not differ from the information given to HIV negative clients.",
+        "impact": "-1"
+      }, {
+        "choiceText": "Information on wound care.",
+        "comment": "There are no special instructions needed to be given to HIV positive clients on wound care, the same post op instructions are given to HIV negative clients.  Post operative instructions on wound care should, emphasize on maintaining proper hygiene, wearing clean underwears which need to be changed daily, taking a bath, making sure he understands some possible complications although rare but can occur such as bleeding, severe pain in the penis/genital area, inability to pass urine, increased swelling and discharge or pus from the surgical wound.  The clients should return to the facility/site or seek emergency care if a problem develops.",
+        "impact": "-2"
+      }],
+      "nextMove": 5,
+      "prevMove": 3
+    },
+    "5": {
       "situationText": "Amani is now on ARV; though he has been cleared for VMMC procedure, he is worried about delayed wound healing time due to his HIV status.",
       "choices": [{
         "choiceText": "You tell client that he will heal normally as other HIV negative clients; it will take up seven days for superficial wound healing and six weeks for complete wound healing.",
-        "comment": "Providers should use this opportunity to insist on adherence to ARV drugs, post op wound care to facilitate healing and return visits.",
+        "comment": "Correct, Reassure the HIV positive client that his HIV status will not interfere with the wound healing. As long as he maintains proper nutrition, proper wound care and hygiene and adherence on his ARV drugs. Superficial wound healing will take up to seven days and complete wound healing is six weeks.",
         "impact": "+1"
       }, {
         "choiceText": "You tell the client that there will be delays in wound healing due his HIV status.",
-        "comment": "As long as he is on ARV and CD4 count is high - more than 250 - and he is taking care of the wound, there will be no difference in healing due to HIV status.",
+        "comment": "This is incorrect, .As a health care provider this is your opportunity to provide further supportive counseling to the client and reassure him that he should maintain good adherence to his ARV's and any other medications prescribed in the Care and Treatment clinic, maintain proper nutrition and wound care. There is no difference on healing because of his HIV status. Make sure you inform the client to avoid sexual intercourse and masturbation for six (6)  weeks after the procedure so as to allow the wound to heal.Provide the client with condoms which he should continue to use after every act of sexual intercounse for at least six months after the six weeks healing period, this is to protect the client against other STIs and unwanted pregnancies.",
         "impact": "-1"
       }, {
         "choiceText": "You assure the client that there will be no delayed healing since ALL HIV positive clients are given prophylactic antibiotics.",
-        "comment": "This is not recommended practice; antibiotic is given only when there wound infection.",
+        "comment": "Prophylactic Antibiotics are not recommended in VMMC services and given only when there is wound infection.",
         "impact": "-2"
       }],
       "nextMove": "clientB",
-      "prevMove": 3
+      "prevMove": 4
     }
   },
   "clientB": {
