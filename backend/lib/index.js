@@ -63,7 +63,7 @@ let jwtValidator = function (req, res, next) {
   }
 }
 
-app.use(jwtValidator)
+//app.use(jwtValidator)
 app.use(bodyParser.urlencoded({
   extended: true,
 }));
@@ -195,7 +195,7 @@ app.post('/addUser', (req, res) => {
     } else {
       var uri = `mongodb://${mongoHost}:${mongoPort}/${database}`;
     }
-    
+
     mongoose.connect(uri, {}, () => {
       models.RolesModel.find({
         name: "Player"
@@ -247,13 +247,17 @@ app.post('/saveModule1Answers', (req, res) => {
     } else {
       var uri = `mongodb://${mongoHost}:${mongoPort}/${database}`;
     }
+
     fields.answers = JSON.parse(fields.answers)
     fields.clientsMood = JSON.parse(fields.clientsMood)
+
+    console.log("Fields");
+    console.log(fields);
+
     mongoose.connect(uri, {}, () => {
       models.module1AnswersModel.find({sessionID: fields.sessionID, player: fields.userID}, (err, data) => {
-        if(data.length == 0) {
+        if (typeof data == "undefined" || data.length == 0) {
           const answers = new models.module1AnswersModel({
-            player: fields.userID,
             sessionID: fields.sessionID,
             answers: fields.answers
           })
@@ -347,7 +351,7 @@ app.get('/getModule1Report', (req, res) => {
   let startDate = req.query.startDate + 'T00:00:00'
   let endDate = req.query.endDate + 'T23:59:59'
   let selectedClient = req.query.client
-  
+
   models.module1AnswersModel.find({
     date: {
       $gte: startDate,
@@ -358,10 +362,12 @@ app.get('/getModule1Report', (req, res) => {
     clientsMood: 1
   }, (err, answers) => {
     try {
-      answers = JSON.parse(JSON.stringify(answers))
+      answers = JSON.parse(JSON.stringify(answers));
+      console.log(answers);
     } catch (error) {
       winston.error(error)
     }
+
     let report = {
       questionsAssesment: {},
       clientsMood: {
@@ -371,7 +377,8 @@ app.get('/getModule1Report', (req, res) => {
         Unsure: 0,
         Unhappy: 0
       }
-    }
+    };
+
     if(answers.length > 0) {
       async.eachSeries(answers, (answer, nxtAnswer) => {
         if(answer.hasOwnProperty('clientsMood') && report.clientsMood.hasOwnProperty(answer.clientsMood[selectedClient])) {
@@ -405,7 +412,7 @@ app.get('/getModule1Report', (req, res) => {
           return nxtAnswer()
         })
       }, () => {
-        res.status(200).json(report)
+        res.status(200).json(answers)
       })
     } else {
       res.status(200).json(report)
@@ -417,7 +424,7 @@ app.get('/getModule2Report', (req, res) => {
   winston.info('Received a request to get module 2 report')
   let startDate = req.query.startDate + 'T00:00:00'
   let endDate = req.query.endDate + 'T23:59:59'
-  
+
   models.module2AnswersModel.find({
     date: {
       $gte: startDate,
