@@ -251,9 +251,6 @@ app.post('/saveModule1Answers', (req, res) => {
     fields.answers = JSON.parse(fields.answers)
     fields.clientsMood = JSON.parse(fields.clientsMood)
 
-    console.log("Fields");
-    console.log(fields);
-
     mongoose.connect(uri, {}, () => {
       models.module1AnswersModel.find({sessionID: fields.sessionID, player: fields.userID}, (err, data) => {
         if (typeof data == "undefined" || data.length == 0) {
@@ -306,9 +303,8 @@ app.post('/saveModule2Answers', (req, res) => {
     fields.answers = JSON.parse(fields.answers)
     mongoose.connect(uri, {}, () => {
       models.module2AnswersModel.find({sessionID: fields.sessionID, player: fields.userID}, (err, data) => {
-        if(data.length == 0) {
+        if (typeof data == "undefined" || data.length == 0) {
           const answers = new models.module2AnswersModel({
-            player: fields.userID,
             sessionID: fields.sessionID,
             answers: fields.answers
           })
@@ -363,7 +359,6 @@ app.get('/getModule1Report', (req, res) => {
   }, (err, answers) => {
     try {
       answers = JSON.parse(JSON.stringify(answers));
-      console.log(answers);
     } catch (error) {
       winston.error(error)
     }
@@ -415,7 +410,7 @@ app.get('/getModule1Report', (req, res) => {
         res.status(200).json(answers)
       })
     } else {
-      res.status(200).json(report)
+      res.status(200).json([])
     }
   })
 })
@@ -470,10 +465,10 @@ app.get('/getModule2Report', (req, res) => {
           return nxtAnswer()
         })
       }, () => {
-        res.status(200).json(report)
+        res.status(200).json(answers)
       })
     } else {
-      res.status(200).json(report)
+      res.status(200).json([])
     }
   })
 })

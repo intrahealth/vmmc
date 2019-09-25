@@ -70,7 +70,7 @@ let module2Answers = new mongoose.Schema({
   player: {
     type: Schema.Types.ObjectId,
     ref: 'Users',
-    required: true
+    required: false
   },
   sessionID: {
     type: String,
