@@ -49,11 +49,14 @@ axios.interceptors.request.use((config) => {
 axios.interceptors.response.use((response) => {
   return response
 }, function (error) {
+/*
   let status = error.response.status
+
   if (status === 401) {
     store.state.auth.token = ''
     VueCookies.remove('token')
     //router.push('login')
   }
   return Promise.reject(error)
+*/
 })
