@@ -215,7 +215,7 @@ module.exports = {
         "comment": "This is incorrect, masturbation is not allowed for the first 6 weeks after MC. The provider must emphasize to the client that he must abstain from sexual activity throughout the healing period. It is very important that clients understand the commitment to abstinence. Healing takes about 6 weeks for adults and adolescents. No sexual activity may occur for 6 weeks after surgery. Sexual activity within 6 weeks of surgery can damage the wound, extend the healing period, and may lead to serious complications such as bleeding and haematoma and increases the risk of HIV transmission and acquisition. Remind the client that once he resume to sexual intercourse, he must use condom appropriately and consistently for the first 6 month following MC.",
         "impact": "0"
       }],
-      "nextMove": 6,
+      "nextMove": "clientC",
       "prevMove": 4
     },
   },

@@ -362,10 +362,12 @@ app.get('/getModule1Report', (req, res) => {
     clientsMood: 1
   }, (err, answers) => {
     try {
-      answers = JSON.parse(JSON.stringify(answers))
+      answers = JSON.parse(JSON.stringify(answers));
+      console.log(answers);
     } catch (error) {
       winston.error(error)
     }
+
     let report = {
       questionsAssesment: {},
       clientsMood: {
@@ -375,7 +377,8 @@ app.get('/getModule1Report', (req, res) => {
         Unsure: 0,
         Unhappy: 0
       }
-    }
+    };
+
     if(answers.length > 0) {
       async.eachSeries(answers, (answer, nxtAnswer) => {
         if(answer.hasOwnProperty('clientsMood') && report.clientsMood.hasOwnProperty(answer.clientsMood[selectedClient])) {
@@ -409,7 +412,7 @@ app.get('/getModule1Report', (req, res) => {
           return nxtAnswer()
         })
       }, () => {
-        res.status(200).json(report)
+        res.status(200).json(answers)
       })
     } else {
       res.status(200).json(report)
