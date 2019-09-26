@@ -63,7 +63,7 @@ let jwtValidator = function (req, res, next) {
   }
 }
 
-//app.use(jwtValidator)
+app.use(jwtValidator)
 app.use(bodyParser.urlencoded({
   extended: true,
 }));
@@ -141,6 +141,7 @@ app.post('/authenticate', (req, res) => {
         if (data.length === 1) {
           let userID = data[0]._id.toString()
           let passwordMatch = bcrypt.compareSync(fields.password, data[0].password);
+
           if (passwordMatch) {
             let tokenDuration = config.getConf('auth:tokenDuration')
             let secret = config.getConf('auth:secret')
@@ -148,7 +149,8 @@ app.post('/authenticate', (req, res) => {
               id: data[0]._id.toString()
             }, secret, {
               expiresIn: tokenDuration
-            })
+            });
+
             // get role name
             models.RolesModel.find({
               _id: data[0].role
@@ -255,6 +257,7 @@ app.post('/saveModule1Answers', (req, res) => {
       models.module1AnswersModel.find({sessionID: fields.sessionID, player: fields.userID}, (err, data) => {
         if (typeof data == "undefined" || data.length == 0) {
           const answers = new models.module1AnswersModel({
+            player: fields.userID,
             sessionID: fields.sessionID,
             answers: fields.answers
           })
@@ -305,6 +308,7 @@ app.post('/saveModule2Answers', (req, res) => {
       models.module2AnswersModel.find({sessionID: fields.sessionID, player: fields.userID}, (err, data) => {
         if (typeof data == "undefined" || data.length == 0) {
           const answers = new models.module2AnswersModel({
+            player: fields.userID,
             sessionID: fields.sessionID,
             answers: fields.answers
           })

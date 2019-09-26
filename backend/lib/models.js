@@ -48,7 +48,7 @@ let module1Answers = new mongoose.Schema({
   player: {
     type: Schema.Types.ObjectId,
     ref: 'Users',
-    required: false
+    required: true
   },
   sessionID: {
     type: String,
@@ -70,7 +70,7 @@ let module2Answers = new mongoose.Schema({
   player: {
     type: Schema.Types.ObjectId,
     ref: 'Users',
-    required: false
+    required: true
   },
   sessionID: {
     type: String,
