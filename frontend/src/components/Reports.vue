@@ -100,17 +100,6 @@
     </v-data-table>
 
     <v-flex v-if="moduleName == 'Module 1'" text-xs-left class="pt-3">
-      <v-data-table
-        :items="summary"
-        hide-actions
-        hide-headers
-      >
-        <template slot="items" slot-scope="props">
-          <td>{{ props.item.question }}</td>
-          <td>{{ props.item.value }}</td>
-        </template>
-      </v-data-table>
-
       <div v-for="client in clients" v-bind:key="client.id" class="pb-3 pt-2">
         <v-data-table
           :headers="questionHeaders.module1[client.id]"
