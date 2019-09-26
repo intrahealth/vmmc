@@ -84,82 +84,59 @@
         <v-spacer></v-spacer>
       </v-layout>
     </v-flex>
-    <v-flex v-if="reportRun" xs12>
-      <v-layout row text-xs-left>
-        <v-flex xs6>
-          <v-flex xs6>
-            <strong>Number of Learners who Completed {{ moduleName }}</strong>
-          </v-flex>
-          <v-flex xs6>
-            {{ numCompleted }} ({{ (numCompleted / totalAttempted) | formatPercent }})
-          </v-flex>
-        </v-flex>
-        <v-flex xs6 v-if="moduleName == 'Module 1'">
-          <v-flex xs10>
-            <strong>Number of Learners who Completed Client A</strong>
-          </v-flex>
-          <v-flex xs2>
-            {{ report.clientA.completed }} ({{ (report.clientA.completed / report.clientA.total) | formatPercent }})
-          </v-flex>
-          <v-flex xs10>
-            <strong>Number of Learners who Completed Client B</strong>
-          </v-flex>
-          <v-flex xs2>
-            {{ report.clientB.completed }} ({{ (report.clientB.completed / report.clientB.total) | formatPercent }})
-          </v-flex>
-          <v-flex xs10>
-            <strong>Number of Learners who Completed Client C</strong>
-          </v-flex>
-          <v-flex xs2>
-            {{ report.clientC.completed }} ({{ (report.clientC.completed / report.clientC.total) | formatPercent }})
-          </v-flex>
-        </v-flex>
-      </v-layout>
-      <v-layout row text-xs-left>
-        <v-flex xs4>
-          <strong>Total Number of Learners in this Training(s)</strong>
-        </v-flex>
-        <v-flex xs8>
-          {{ totalLearners }}
-        </v-flex>
-      </v-layout>
-    </v-flex>
+    <v-toolbar flat color="white">
+      <v-toolbar-title>{{ moduleTitle }}</v-toolbar-title>
+    </v-toolbar>
+
+    <v-data-table
+      :items="summary"
+      hide-actions
+      hide-headers
+    >
+      <template slot="items" slot-scope="props">
+        <td>{{ props.item.question }}</td>
+        <td>{{ props.item.value }}</td>
+      </template>
+    </v-data-table>
+
     <v-flex v-if="moduleName == 'Module 1'" text-xs-left class="pt-3">
-      <strong>Module 1: VMMC Health Education, Counseling and HIV Testing</strong><br>
+      <v-data-table
+        :items="summary"
+        hide-actions
+        hide-headers
+      >
+        <template slot="items" slot-scope="props">
+          <td>{{ props.item.question }}</td>
+          <td>{{ props.item.value }}</td>
+        </template>
+      </v-data-table>
+
       <div v-for="client in clients" v-bind:key="client.id" class="pb-3 pt-2">
-        <strong>{{ client.id | sentenceCase }} ({{ client.name }})</strong>
-        <table>
-          <thead>
-            <tr>
-              <th>Percentage of participants who answered each question correctly</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="question in questionData.module1[client.id]" :key="question.question">
-              <td width="80%">{{ question.question }}</td>
-              <td width="20%" style="text-align: right">{{ question.percent }}</td>
-            </tr>
-          </tbody>    
-        </table>
+        <v-data-table
+          :headers="questionHeaders.module1[client.id]"
+          :items="questionData.module1[client.id]"
+          :items-per-page="10"
+          hide-actions
+        >
+          <template slot="items" slot-scope="props">
+            <td>{{ props.item.question }}</td>
+            <td>{{ props.item.percent }}</td>
+          </template>
+        </v-data-table>
       </div>
     </v-flex>
     <v-flex v-if="moduleName == 'Module 2'" text-cs-left class="pt-3">
-      <strong>Module 2: MC Surgical Procedure (Dorsal Slit Method)</strong>
-      <table>
-        <thead>
-          <tr>
-            <th>Percentage of participants who answered each question correctly</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="question in questionData.module2" :key="question.question">
-            <td width="80%">{{ question.question }}</td>
-            <td width="20%" style="text-align: right">{{ question.percent }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <v-data-table
+        :headers="questionHeaders.module2"
+        :items="questionData.module2"
+        :items-per-page="10"
+        hide-actions
+      >
+        <template slot="items" slot-scope="props">
+          <td>{{ props.item.question }}</td>
+          <td>{{ props.item.percent }}</td>
+        </template>
+      </v-data-table>
     </v-flex>
   </v-layout>
 </template>
@@ -219,18 +196,59 @@ export default {
         {text: "Dental Officer", value: "dental-officer"}
       ],
       cadre: "",
-      questionHeaders: [
-        {
-          text: "Percentage of participants who answered each question correctly",
-          value: "question",
-          sortable: false
+      moduleTitle: null,
+      questionHeaders: {
+        module1: {
+          clientA: [
+            {
+              text: "Client A (Amani) Percentage of participants who answered each question correctly",
+              value: "question",
+              sortable: false
+            },
+            {
+              text: "",
+              value: "percent",
+              sortable: false
+            }
+          ],
+          clientB: [
+            {
+              text: "Client B (Zabron) Percentage of participants who answered each question correctly",
+              value: "question",
+              sortable: false
+            },
+            {
+              text: "",
+              value: "percent",
+              sortable: false
+            }
+          ],
+          clientC: [
+            {
+              text: "Client C (Anold) Percentage of participants who answered each question correctly",
+              value: "question",
+              sortable: false
+            },
+            {
+              text: "",
+              value: "percent",
+              sortable: false
+            }
+          ]
         },
-        {
-          text: "",
-          value: "percent",
-          sortable: false
-        }
-      ],
+        module2: [
+          {
+            text: "Percentage of participants who answered each question correctly",
+            value: "question",
+            sortable: false
+          },
+          {
+            text: "",
+            value: "percent",
+            sortable: false
+          }
+        ]
+      },
       questionData: {},
       startDateMenu: false,
       endDateMenu: false,
@@ -250,8 +268,6 @@ export default {
       client: 'clientA',
       module1: module1,
       module2: module2,
-      numCompleted: 0,
-      totalAttempted: 0,
       moduleName: null,
       report: [],
       training: "",
@@ -260,7 +276,7 @@ export default {
         {text: "New / Basic", value: "basic"},
         {text: "Refresher", value: "refresher"}
       ],
-      totalLearners: 0
+      summary: []
     }
   },
   methods: {
@@ -291,6 +307,7 @@ export default {
         let report = {};
         let totalAttempted = 0;
         let questionData = {};
+        let summary = [];
 
         for (var i in this.clients) {
           report[this.clients[i].id] = {
@@ -303,7 +320,6 @@ export default {
 
         this.reportRun = true;
         this.moduleName = "Module 1";
-        this.totalLearners = response.data.length;
 
         for (var i in response.data) {
           fullyComplete = true;
@@ -338,10 +354,33 @@ export default {
             numCompleted++;
           }
         }
-      
-        this.numCompleted = numCompleted;
-        this.report = report;
-        this.totalAttempted = totalAttempted;
+
+        summary.push({
+          question: "Number of Learners who Completed Module 1",
+          value: numCompleted + " (" + numeral(numCompleted / totalAttempted).format("0.00%") + ")"
+        });
+
+        summary.push({
+          question: "Number of Learners who Completed Client A",
+          value: report.clientA.completed + " (" + numeral(report.clientA.completed / report.clientA.total).format("0.00%") + ")"
+        });
+
+        summary.push({
+          question: "Number of Learners who Completed Client B",
+          value: report.clientB.completed + " (" + numeral(report.clientB.completed / report.clientB.total).format("0.00%") + ")"
+        });
+
+        summary.push({
+          question: "Number of Learners who Completed Client C",
+          value: report.clientC.completed + " (" + numeral(report.clientC.completed / report.clientC.total).format("0.00%") + ")"
+        });
+
+        summary.push({
+          question: "Total Number of Learners in this Training(s)",
+          value: response.data.length
+        });
+
+        this.summary = summary;
 
         for (var clientId in questions.module1) {
           for (var j in questions.module1[clientId]) {
@@ -353,6 +392,7 @@ export default {
         }
 
         this.questionData.module1 = questionData;
+        this.moduleTitle = "Module 1: VMMC Health Education, Counseling and HIV Testing";
       });
     },
     getModule2Report() {
@@ -363,10 +403,10 @@ export default {
         let questions = this.questions.module2;
         let totalAttempted = 0;
         let totalCompleted = 0;
+        let summary = [];
 
         this.reportRun = true;
         this.moduleName = "Module 2";
-        this.totalLearners = response.data.length;
 
         for (var i in response.data) {
           let submission = response.data[i];
@@ -401,7 +441,19 @@ export default {
           });
         }
 
+        summary.push({
+          question: "Number of Learners who Completed Module 2",
+          value: totalCompleted + " (" + numeral(totalCompleted / totalAttempted).format("0.00%") + ")"
+        });
+
+        summary.push({
+          question: "Total Number of Learners in this Training(s)",
+          value: response.data.length
+        });
+
         this.questionData.module2 = questionData;
+        this.moduleTitle = "Module 2: MC Surgical Procedure (Dorsal Slit Method)";
+        this.summary = summary;
       })
     },
     resetQuestionCount() {
