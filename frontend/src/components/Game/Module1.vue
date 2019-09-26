@@ -7,8 +7,7 @@
 						Comment
 					</v-toolbar-title>
 				</v-toolbar>
-				<v-card-text>
-					{{comment}}
+				<v-card-text v-html="comment">
 				</v-card-text>
 				<v-card-actions>
 					<v-btn color="primary" @click.native="commentDialog = false">Ok</v-btn>

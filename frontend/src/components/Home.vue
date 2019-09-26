@@ -22,10 +22,9 @@
             <v-icon color="white" right>tab</v-icon>
           </v-tab>-->
 					<v-tab-item key="module1Item" class="moduleIntro">
-            <p>In this module, as the health worker, you will provide preoperative counseling for three clients, Amani, Zabron and Arnold, to inform them about circumcision. You will make choices throughout discussions in the scenario about how you counsel them. The outcome of the counseling session is to have a well-informed client who agrees to undergo circumcision.</p>
+            <p>In this module, as the health worker, you will provide preoperative counseling for three clients, Amani, Zabron and Arnold,*to inform them about circumcision. You will make choices throughout discussions in the scenario about how you counsel them. The outcome of the counseling session is to have a well-informed client who agrees to undergo circumcision.</p>
             <p>The client satisfaction meter at the bottom will measure your client’s mood: Unhappy, Unsure, Neutral, Interested and Satisfied. The aim is to have the meter read Interested or Satisfied. At Interested or Satisfied, Amani, Zabron and Arnold will each be well-informed and agree to undergo circumcision.</p>
-            <p>To practice counseling in the module, read the discussion in the scenario and select a response. Click NEXT. You will see the client satisfaction for that counseling. The client satisfaction meter will change depending on what you choose. </p>
-
+            <p>To practice counseling in the module, read the discussion in the scenario and select a response. Click NEXT. You will see the client satisfaction for that counseling. The client satisfaction meter will change depending on what you choose.</p>
 						<v-layout row wrap>
 							<v-flex xs1>
 								<v-btn to='/Module1' color="primary">Start Module 1</v-btn>
