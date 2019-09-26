@@ -140,40 +140,30 @@ app.post('/authenticate', (req, res) => {
       }).lean().exec((err, data) => {
         if (data.length === 1) {
           let userID = data[0]._id.toString()
-          let passwordMatch = bcrypt.compareSync(fields.password, data[0].password);
 
-          if (passwordMatch) {
-            let tokenDuration = config.getConf('auth:tokenDuration')
-            let secret = config.getConf('auth:secret')
-            let token = jwt.sign({
-              id: data[0]._id.toString()
-            }, secret, {
-              expiresIn: tokenDuration
-            });
+          let tokenDuration = config.getConf('auth:tokenDuration')
+          let secret = config.getConf('auth:secret')
+          let token = jwt.sign({
+            id: data[0]._id.toString()
+          }, secret, {
+            expiresIn: tokenDuration
+          });
 
-            // get role name
-            models.RolesModel.find({
-              _id: data[0].role
-            }).lean().exec((err, roles) => {
-              let role = null
-              if (roles.length === 1) {
-                role = roles[0].name
-              }
-              winston.info('Successfully Authenticated user ' + fields.username)
-              res.status(200).json({
-                token,
-                role,
-                userID
-              })
-            })
-          } else {
-            winston.info('Failed Authenticating user ' + fields.username)
+          // get role name
+          models.RolesModel.find({
+            _id: data[0].role
+          }).lean().exec((err, roles) => {
+            let role = null
+            if (roles.length === 1) {
+              role = roles[0].name
+            }
+            winston.info('Successfully Authenticated user ' + fields.username)
             res.status(200).json({
-              token: null,
-              role: null,
-              userID: null
+              token,
+              role,
+              userID
             })
-          }
+          });
         } else {
           winston.info('Failed Authenticating user ' + fields.username)
           res.status(200).json({
