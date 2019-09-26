@@ -52,7 +52,7 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '',
 
-    backend: 'http://52.18.125.4:8081/nkiNode',
+    backend: 'http://172.104.46.60:8081',
     /**
      * Source Maps
      */
