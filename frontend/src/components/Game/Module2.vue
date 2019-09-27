@@ -305,11 +305,13 @@ export default {
 			}
 		},
 		checkAnswer () {
-			let selectedAnswer = this.selectedAnswers[this.questionNumber - 1]
+			let selectedAnswer = this.selectedAnswers[this.questionNumber - 1];
+
 			if (selectedAnswer) {
 				this.loadNextQuestion()
 				return
 			} 
+
 			if (this.selectedParentChoice === null) {
 				if (this.questionNumber === 4 || this.questionNumber === 3 || this.questionNumber === 8 || this.questionNumber === 9){
 					if (!this.answersTracker.hasOwnProperty(this.questionNumber)) {
@@ -346,15 +348,17 @@ export default {
 			}	else {
 				if (this.choices[this.selectedParentChoice].correct === 'no'
 					|| (this.choices[this.selectedParentChoice].hasOwnProperty('choices') && this.choices[this.selectedParentChoice]['choices'][this.selectedChildChoice].correct === 'no')) {
-					this.displayCorrectAnswer()
-					this.trackAnswers('Wrong')
-
+ 					this.$store.state.dialogError = true;
+	    		this.$store.state.errorTitle = 'Incorrect';
+	    		this.$store.state.errorDescription = this.moduleQuestions[this.questionNumber - 1].choices[this.selectedParentChoice].comment;
+					this.trackAnswers('Wrong');
 				} else {
-					this.trackAnswers('Correct')
-					this.$store.state.dialogError = true
-	    		this.$store.state.errorTitle = 'Correct'
-	    		this.$store.state.errorDescription = "That is the correct answer"
+					this.trackAnswers('Correct');
+					this.$store.state.dialogError = true;
+	    		this.$store.state.errorTitle = 'Correct';
+	    		this.$store.state.errorDescription = this.moduleQuestions[this.questionNumber - 1].choices[this.selectedParentChoice].comment;
 				}
+
 				this.selectedAnswers[this.questionNumber - 1] = {}
 				this.selectedAnswers[this.questionNumber - 1].parentChoice = this.selectedParentChoice
 				if (this.choices[this.selectedParentChoice].hasOwnProperty('choices')) {
@@ -372,7 +376,6 @@ export default {
 		displayCorrectAnswer () {
 			let correctAnswer
 			if (this.questionNumber === 3) {
-				
 		   		this.$store.state.dialogError = true
 	    		this.$store.state.errorTitle = 'That is not correct, below is the correct answer'
 	    		this.$store.state.errorDescription = "The Dorsal Penile nerves at 1 o'clock and 11 o'clock Positions " 
@@ -405,7 +408,7 @@ export default {
 				}
 
 				this.$store.state.dialogError = true
-				this.$store.state.errorTitle = 'That is not correct, below is the correct answer'
+				this.$store.state.errorTitle = 'Comment';
 				this.$store.state.errorDescription = correctAnswer
 			}
 		},
