@@ -407,10 +407,6 @@ export default {
 					}
 				}
 
-        console.log(this.choices);
-        console.log(this.questionNumber);
-        console.log(this.moduleQuestions);
-
 				this.$store.state.dialogError = true
 				this.$store.state.errorTitle = 'Comment';
 				this.$store.state.errorDescription = correctAnswer
