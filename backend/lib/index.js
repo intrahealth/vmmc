@@ -376,134 +376,109 @@ app.post('/saveModule2Answers', (req, res) => {
 
 app.get('/getModule1Report', (req, res) => {
   winston.info('Received a request to get module 1 report')
-  let startDate = req.query.startDate + 'T00:00:00'
-  let endDate = req.query.endDate + 'T23:59:59'
-  let selectedClient = req.query.client
+  let startDate = req.query.startDate + 'T00:00:00';
+  let endDate = req.query.endDate + 'T23:59:59';
+  let cadre = req.query.cadre;
+  let training = req.query.trainingType;
 
-  models.module1AnswersModel.find({
-    date: {
-      $gte: startDate,
-      $lte: endDate
-    }
-  }, {
-    answers: 1,
-    clientsMood: 1
-  }, (err, answers) => {
-    try {
-      answers = JSON.parse(JSON.stringify(answers));
-    } catch (error) {
-      winston.error(error)
-    }
+  let personQuery = {};
 
-    let report = {
-      questionsAssesment: {},
-      clientsMood: {
-        Satisfied: 0,
-        Interested: 0,
-        Neutral: 0,
-        Unsure: 0,
-        Unhappy: 0
+  if (cadre) {
+    personQuery.cadre = cadre;
+  }
+
+  if (training) {
+    personQuery.trainingType = training;
+  };
+
+  models.TraineeModel.find(personQuery).then(trainees => {
+    let traineeIds = [];
+    let query = {
+      date: {
+        $gte: startDate,
+        $lte: endDate
       }
     };
 
-    if(answers.length > 0) {
-      async.eachSeries(answers, (answer, nxtAnswer) => {
-        if(answer.hasOwnProperty('clientsMood') && report.clientsMood.hasOwnProperty(answer.clientsMood[selectedClient])) {
-          report.clientsMood[answer.clientsMood[selectedClient]]++
-        }
-        async.eachOfSeries(answer.answers, (client, clientKey, nxtClient) => {
-          if(clientKey != selectedClient) {
-            return nxtClient()
-          }
-          async.eachOfSeries(client, (question, qnKey, nxtQuestion) => {
-            let questionNum = ++qnKey
-            if(!report.questionsAssesment.hasOwnProperty(questionNum)) {
-              report.questionsAssesment[questionNum] = {
-                wrong: 0,
-                correct: 0,
-                neutral: 0
-              }
-            }
-            if(question.impact < 0) {
-              report.questionsAssesment[questionNum].wrong += 1
-            } else if(question.impact > 0) {
-              report.questionsAssesment[questionNum].correct += 1
-            } else {
-              report.questionsAssesment[questionNum].neutral += 1
-            }
-            return nxtQuestion()
-          }, () => {
-            return nxtClient()
-          })
-        }, () => {
-          return nxtAnswer()
-        })
-      }, () => {
-        res.status(200).json(answers)
-      })
-    } else {
-      res.status(200).json([])
-    }
-  })
+    trainees.forEach(trainee => {
+      traineeIds.push(trainee._id);
+    });
+
+    query.player = {
+      $in: traineeIds
+    };
+
+    models.module1AnswersModel.find(query, {
+      answers: 1,
+      clientsMood: 1
+    }, (err, answers) => {
+      try {
+        answers = JSON.parse(JSON.stringify(answers));
+      } catch (error) {
+        winston.error(error)
+      }
+
+      if (answers && answers.length) {
+        res.status(200).json(answers);
+      } else {
+        res.status(200).json([])
+      }
+    });
+  });
 })
 
 app.get('/getModule2Report', (req, res) => {
   winston.info('Received a request to get module 2 report')
-  let startDate = req.query.startDate + 'T00:00:00'
-  let endDate = req.query.endDate + 'T23:59:59'
+  let startDate = req.query.startDate + 'T00:00:00';
+  let endDate = req.query.endDate + 'T23:59:59';
+  let cadre = req.query.cadre;
+  let training = req.query.trainingType;
 
-  models.module2AnswersModel.find({
-    date: {
-      $gte: startDate,
-      $lte: endDate
-    }
-  }, {
-    answers: 1,
-    accummulatedPoints: 1
-  }, (err, answers) => {
-    try {
-      answers = JSON.parse(JSON.stringify(answers))
-    } catch (error) {
-      winston.error(error)
-    }
-    let report = {
-      questionsAssesment: {},
-      successfulProcedure: 0,
-      failedProcedure: 0
-    }
-    if(answers.length > 0) {
-      async.eachSeries(answers, (answer, nxtAnswer) => {
-        if(answer.hasOwnProperty('accummulatedPoints')) {
-          if(report.accummulatedPoints >= 13) {
-            report.successfulProcedure++
-          } else {
-            report.failedProcedure++
-          }
-        }
-        async.eachOfSeries(answer.answers, (question, qnKey, nxtQuestion) => {
-          if(!report.questionsAssesment.hasOwnProperty(qnKey)) {
-            report.questionsAssesment[qnKey] = {
-              Wrong: 0,
-              Correct: 0
-            }
-          }
-          if(Object.values(question)[0] == 'Wrong') {
-            report.questionsAssesment[qnKey].Wrong += 1
-          } else if(Object.values(question)[0] == 'Correct') {
-            report.questionsAssesment[qnKey].Correct += 1
-          }
-          return nxtQuestion()
-        }, () => {
-          return nxtAnswer()
-        })
-      }, () => {
-        res.status(200).json(answers)
-      })
-    } else {
-      res.status(200).json([])
-    }
-  })
-})
+  let personQuery = {};
+
+  if (cadre) {
+    personQuery.cadre = cadre;
+  }
+
+  if (training) {
+    personQuery.trainingType = training;
+  };
+
+  models.TraineeModel.find(personQuery).then(trainees => {
+    let traineeIds = [];
+    let query = {
+      date: {
+        $gte: startDate,
+        $lte: endDate
+      }
+    };
+
+    trainees.forEach(trainee => {
+      traineeIds.push(trainee._id);
+    });
+
+    query.player = {
+      $in: traineeIds
+    };
+
+    models.module2AnswersModel.find(query, {
+      answers: 1,
+      accummulatedPoints: 1
+    }, (err, answers) => {
+      try {
+        answers = JSON.parse(JSON.stringify(answers));
+      } catch (error) {
+        winston.error(error)
+      }
+
+      if (answers && answers.length) {
+        res.status(200).json(answers);
+      } else {
+        res.status(200).json([])
+      }
+    });
+  });
+});
 
 app.post('/saveModule1Question', (req, res) => {
   const form = new formidable.IncomingForm();

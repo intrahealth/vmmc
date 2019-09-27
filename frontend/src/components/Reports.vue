@@ -287,7 +287,7 @@ export default {
     getModule1Report() {
       this.report = [];
 
-      let query = `startDate=${this.startDate}&endDate=${this.endDate}&client=${this.client}`;
+      let query = `startDate=${this.startDate}&endDate=${this.endDate}&cadre=${this.cadre}&trainingType=${this.training}`;
 
       axios.get(backendServer + `/getModule1Report?${query}`).then(response => {
         let numCompleted = 0;
@@ -385,7 +385,7 @@ export default {
       });
     },
     getModule2Report() {
-      let query = `startDate=${this.startDate}&endDate=${this.endDate}`;
+      let query = `startDate=${this.startDate}&endDate=${this.endDate}&cadre=${this.cadre}&trainingType=${this.training}`;
 
       axios.get(backendServer + `/getModule2Report?${query}`).then(response => {
         let questionData = [];
