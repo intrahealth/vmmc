@@ -44,10 +44,33 @@ let Users = new mongoose.Schema({
   }
 });
 
+let Trainee = new mongoose.Schema({
+  startDate: {
+    type: Date,
+    required: true
+  },
+  endDate: {
+    type: Date,
+    required: true
+  },
+  cadre: {
+    type: String,
+    required: true
+  },
+  trainingType: {
+    type: String,
+    required: true
+  },
+  sessionId: {
+    type: String,
+    required: true
+  }
+});
+
 let module1Answers = new mongoose.Schema({
   player: {
     type: Schema.Types.ObjectId,
-    ref: 'Users',
+    ref: 'Trainee',
     required: true
   },
   sessionID: {
@@ -69,7 +92,7 @@ let module1Answers = new mongoose.Schema({
 let module2Answers = new mongoose.Schema({
   player: {
     type: Schema.Types.ObjectId,
-    ref: 'Users',
+    ref: 'Trainee',
     required: true
   },
   sessionID: {
@@ -89,11 +112,13 @@ let module2Answers = new mongoose.Schema({
 });
 
 let RolesModel = mongoose.model('Roles', Roles);
+let TraineeModel = mongoose.model("Trainee", Trainee);
 let UsersModel = mongoose.model('Users', Users);
 let module1AnswersModel = mongoose.model('module1Answers', module1Answers);
 let module2AnswersModel = mongoose.model('module2Answers', module2Answers);
 
 module.exports = {
+  TraineeModel,
   UsersModel,
   RolesModel,
   module1AnswersModel,

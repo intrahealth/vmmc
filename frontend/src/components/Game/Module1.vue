@@ -361,7 +361,7 @@ export default {
 			// dont save if client is A and question number is 1
 			if(this.client !== 'clientA' || this.questionNumber != 1) {
 				let formData = new FormData()
-				formData.append('userID', this.$store.state.auth.userID)
+				formData.append('traineeID', this.$store.state.traineeId);
 				formData.append('sessionID', this.sessionID)
 				formData.append('answers', JSON.stringify(this.selectedAnswers))
 				formData.append('clientsMood', JSON.stringify(overallMood))
