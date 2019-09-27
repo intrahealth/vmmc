@@ -465,7 +465,7 @@ export default {
 			} else {
 				// save prev response into database
 				let formData = new FormData()
-				formData.append('userID', this.$store.state.auth.userID)
+				formData.append('traineeId', this.$store.state.auth.traineeId)
 				formData.append('sessionID', this.sessionID)
 				formData.append('answers', JSON.stringify(this.answersTracker))
 				formData.append('accummulatedPoints', this.accummulatedPoints)

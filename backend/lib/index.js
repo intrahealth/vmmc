@@ -23,10 +23,13 @@ const server = require('http').createServer(app);
 
 let jwtValidator = function (req, res, next) {
   if (req.method == "OPTIONS" ||
+    req.path == "/add-trainee/" ||
     req.path == "/authenticate/" ||
     req.path == "/addUser/" ||
     req.path == "/getModule1Report" ||
-    req.path == "/getModule2Report"
+    req.path == "/getModule2Report" ||
+    req.path == "/saveModule1Answers/" ||
+    req.path == "/saveModule2Answers/"
   ) {
     return next()
   }
@@ -78,6 +81,7 @@ if (mongoUser && mongoPasswd) {
 } else {
   var uri = `mongodb://${mongoHost}:${mongoPort}/${database}`;
 }
+
 mongoose.connect(uri, { useNewUrlParser: true });
 let db = mongoose.connection
 db.on("error", console.error.bind(console, "connection error:"))
@@ -118,7 +122,41 @@ db.once("open", () => {
       })
     }
   })
-})
+});
+
+app.post('/add-trainee', (req, res) => {
+  winston.info("Adding a new trainee");
+
+  const form = new formidable.IncomingForm();
+  form.parse(req, (err, fields, files) => {
+    if (mongoUser && mongoPasswd) {
+      var uri = `mongodb://${mongoUser}:${mongoPasswd}@${mongoHost}:${mongoPort}/${database}`;
+    } else {
+      var uri = `mongodb://${mongoHost}:${mongoPort}/${database}`;
+    }
+
+    mongoose.connect(uri, {}, () => {
+      let Trainee = new models.TraineeModel({
+        startDate: fields.startDate,
+        endDate: fields.endDate,
+        cadre: fields.cadre,
+        trainingType: fields.trainingType,
+        sessionId: fields.sessionId
+      });
+
+      Trainee.save((err, data) => {
+        if (err) {
+          winston.error(err);
+          winston.error('Unexpected error occured,please retry');
+          res.status(400).send();
+        } else {
+          winston.info('Trainee added successfully');
+          res.status(200).send(data);
+        }
+      });
+    });
+  });
+});
 
 app.post('/authenticate', (req, res) => {
   const form = new formidable.IncomingForm();
@@ -244,10 +282,10 @@ app.post('/saveModule1Answers', (req, res) => {
     fields.clientsMood = JSON.parse(fields.clientsMood)
 
     mongoose.connect(uri, {}, () => {
-      models.module1AnswersModel.find({sessionID: fields.sessionID, player: fields.userID}, (err, data) => {
+      models.module1AnswersModel.find({sessionID: fields.sessionID, player: fields.traineeID}, (err, data) => {
         if (typeof data == "undefined" || data.length == 0) {
           const answers = new models.module1AnswersModel({
-            player: fields.userID,
+            player: fields.traineeID,
             sessionID: fields.sessionID,
             answers: fields.answers
           })
@@ -263,7 +301,7 @@ app.post('/saveModule1Answers', (req, res) => {
             }
           })
         } else {
-          models.module1AnswersModel.update({sessionID: fields.sessionID, player: fields.userID}, {
+          models.module1AnswersModel.update({sessionID: fields.sessionID, player: fields.traineeID}, {
             $set: {
               answers: fields.answers,
               clientsMood: fields.clientsMood
@@ -295,10 +333,10 @@ app.post('/saveModule2Answers', (req, res) => {
     }
     fields.answers = JSON.parse(fields.answers)
     mongoose.connect(uri, {}, () => {
-      models.module2AnswersModel.find({sessionID: fields.sessionID, player: fields.userID}, (err, data) => {
+      models.module2AnswersModel.find({sessionID: fields.sessionID, player: fields.traineeID}, (err, data) => {
         if (typeof data == "undefined" || data.length == 0) {
           const answers = new models.module2AnswersModel({
-            player: fields.userID,
+            player: fields.traineeID,
             sessionID: fields.sessionID,
             answers: fields.answers
           })
@@ -314,7 +352,7 @@ app.post('/saveModule2Answers', (req, res) => {
             }
           })
         } else {
-          models.module2AnswersModel.update({sessionID: fields.sessionID, player: fields.userID}, {
+          models.module2AnswersModel.update({sessionID: fields.sessionID, player: fields.traineeID}, {
             $set: {
               answers: fields.answers,
               accummulatedPoints: fields.accummulatedPoints

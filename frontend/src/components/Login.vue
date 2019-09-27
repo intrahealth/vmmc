@@ -62,6 +62,18 @@
               color="deep-purple"
               label="Username"
             />
+            <v-text-field    
+              required    
+              v-on:keyup.enter="authenticate()"    
+              @blur="$v.password.$touch()"    
+              @change="$v.password.$touch()"    
+              :error-messages="passwordErrors"    
+              v-model="password"    
+              box    
+              type="password"    
+              color="deep-purple"    
+              label="Password"    
+            />
           </v-form>
         </v-card-text>
         <v-card-actions>
@@ -97,19 +109,22 @@ const backendServer = (isProduction ? config.build.backend : config.dev.backend)
 
 export default {
   validations: {
-    username: { required }
+    username: { required },
+    password: { required }
   },
   data () {
     return {
       username: '',
+      password: '',
       authStatus: false,
       signupEnabled: false
     }
   },
   methods: {
     authenticate () {
-      let formData = new FormData()
-      formData.append('username', this.username)
+      let formData = new FormData();
+      formData.append('username', this.username);
+      formData.append('password', this.password);
       axios
         .post(backendServer + '/authenticate/', formData, {
           headers: {
@@ -148,6 +163,12 @@ export default {
       const errors = []
       if (!this.$v.username.$dirty) return errors
       !this.$v.username.required && errors.push('Username is required')
+      return errors;
+    },
+    passwordErrors () {    
+      const errors = []    
+      if (!this.$v.password.$dirty) return errors    
+      !this.$v.password.required && errors.push('Password is required')    
       return errors
     }
   }
