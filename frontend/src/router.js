@@ -62,7 +62,10 @@ router.beforeEach((to, from, next) => {
       });
     } else if (to.path !== '/Login' && to.path !== '/Signup' && !store.state.traineeId) {
       next({
-        path: '/Signup'
+        path: '/Signup',
+        query: {
+          previousPath: to.path
+        }
       })
     } else {
       next()
