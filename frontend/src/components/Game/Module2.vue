@@ -60,7 +60,7 @@
 					<v-toolbar color="#566573">
 						<v-layout row wrap>
 							<v-flex xs4 text-sm-left style="color:white">
-								<b>MALE CIRCUMCISION CHALLENGE</b>
+							  <b>TOHARA BANGUA BONGO</b>
 							</v-flex>
 							<v-spacer></v-spacer>
 							<v-flex xs1 text-sm-right style="color:white">
