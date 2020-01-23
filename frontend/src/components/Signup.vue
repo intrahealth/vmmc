@@ -193,7 +193,8 @@ export default {
       trainingType: '',
       alertFail: false,
       alertSuccess: false,
-      alertMsg: ''
+      alertMsg: '',
+      previousPath: null
     }
   },
   methods: {
@@ -233,9 +234,15 @@ export default {
           this.alertSuccess = true;
           this.alertMsg = 'Account created successfully';
 
-          this.$router.push({
-            name: "Home"
-          });
+          if (this.previousPath) {
+            this.$router.push({
+              path: this.previousPath
+            });
+          } else {
+            this.$router.push({
+              name: "Home"
+            });
+          }
         });
     },
     displayLogin () {
@@ -269,6 +276,7 @@ export default {
     }
   },
   created () {
+    this.previousPath = this.$route.query.previousPath;
     this.$store.state.signupFields = VueCookies.get('signupFields');
     this.sessionId = uuid.v4();
   },
