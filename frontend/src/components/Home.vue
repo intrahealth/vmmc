@@ -3,6 +3,13 @@
 	<v-container fluid>
 		<v-layout column>
 			<v-flex>
+        <v-toolbar color="cyan">
+          <v-layout row wrap>
+            <v-flex text-sm-center style="color:white">
+              <h1><b>TOHARA BANGUA BONGO</b></h1>
+            </v-flex>
+          </v-layout>
+        </v-toolbar>
 				<v-tabs icons-and-text centered grow dark color="cyan">
           <v-tabs-slider color="red"></v-tabs-slider>
 					<v-tab key="moule1">
