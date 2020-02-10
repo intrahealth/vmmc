@@ -235,8 +235,8 @@ export default {
 			},
 			question3count : 0,
 			question3Coordinates:[
-				{ PositionX1: 460, PositionY1: 138 },
-				{ PositionX2: 493, PositionY2: 138 }
+				{ PositionX1: 460, PositionY1: 95},
+				{ PositionX2: 493, PositionY2: 95 }
 			],
 			question8count : 0,
 			question8Coordinates:[
