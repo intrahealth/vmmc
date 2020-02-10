@@ -50,11 +50,11 @@ module.exports = {
 			'bonus': 0
 		},
 		{
-			'choiceText': 'C. Pause procedure, the aseptic technique is incorrect',
+			'choiceText': 'C. Pause procedure',
 			'comment': 'Correct! To ensure aseptic technique is observed when drawing the local anaesthesia, the assistant should hold the vial while the surgeon is drawing the anaesthesia.',
 			'correct': 'yes',
 			'choices': [{
-				'choiceText': 'Why? Incorrect aseptic technique',
+				'choiceText': 'Aseptic technique is not observed.',
 				'correct': 'yes',
 				'impact': 1,
 				'bonus': 0
