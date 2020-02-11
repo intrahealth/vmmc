@@ -71,22 +71,40 @@
 				</v-flex>
 				<v-flex xs4>
 					<div class="questionImg" v-if="questionNumber === 3" @click="imageAnswers" >
-						<v-img  :src="getImgUrl()" v-bind:alt="questionImg"  contain max-height="450" height="250"></v-img>
+						<v-img :src="getImgUrl()" contain max-height="450" height="250"></v-img>
 					</div>
 					<div class="questionImg" v-else-if="questionNumber === 4" >
 						<div>ITEMS
-							<drag class="drag" v-for="question4Img in question4Imgs" :key="question4Img.id" :image="question4Img.img" :transfer-data="concatinateData(question4Img.title,question4Img.bin)">
-								<v-img :src="question4Img.img" v-bind:alt="question4Img.id" contain ></v-img>
-							</drag>
+              <draggable class="items-list" :list="question4Imgs" group="items">
+                <v-flex
+                  class="list-group-item"
+                  v-for="question4Img in question4Imgs"
+                  :key="question4Imgs.title"
+                >
+						  		<v-img :src="question4Img.img" contain max-width="200"></v-img>
+                </v-flex>
+              </draggable>
 						</div>
-						<div height="20px" >
-							
+
+						<div height="20px" >							
 						</div>
+
 						<div>
 							BINS
-							<drop class="drop" v-for="question4ImgBin in question4ImgsBins" :key="question4ImgBin.id" @drop="handleDragover(question4ImgBin.title, ...arguments)" >
-								<v-img :src="question4ImgBin.img" v-bind:alt="question4ImgBin.id" contain max-height="100" height="250" ></v-img>
-							</drop>
+              <div class="items-list">
+              <v-flex class="list-group-item" v-for="question4ImgBin in question4ImgsBins" :key="question4ImgBin.id">
+                <draggable :list="question4Answers[question4ImgBin.title]" group="items" @change="handleDragover">
+                  <v-flex
+                    class="list-group-item"
+                    v-for="image in question4Answers[question4ImgBin.title]"
+                    :key="image.title"
+                  >
+                    <v-img :src="image.img" contain max-height="100" height="250"></v-img>
+                  </v-flex>
+                  <v-img :src="question4ImgBin.img" contain max-height="100" height="250" slot="header"></v-img>
+                </draggable>
+              </v-flex>
+              </div>
 						</div>
 					</div>
 					<div class="questionImg" v-else-if="questionNumber === 8" @click="imageAnswers">
@@ -188,6 +206,8 @@ let module2 = require('../questions/module2.js')
 const config = require('../../../config')
 const isProduction = process.env.NODE_ENV === 'production'
 const backendServer = (isProduction ? config.build.backend : config.dev.backend)
+import draggable from "vuedraggable";
+
 export default {
 	data () {
 		return {
@@ -244,22 +264,30 @@ export default {
 				{ PositionX2: 577, PositionY2: 164 }
 			],
 			question4Imgs: [
-			    {title: 'ampule',  bin: 'yellow' ,img: require('../../assets/images/module2/Mod2_04/mod2_q4_ampule.png'), id: 1},
+			  {title: 'ampule',  bin: 'yellow' ,img: require('../../assets/images/module2/Mod2_04/mod2_q4_ampule.png'), id: 1},
 				{title: 'biohazard', bin: 'red',  img: require('../../assets/images/module2/Mod2_04/mod2_q4_biohazard.png'), id: 2},
 				{title: 'blood', bin: 'red', img: require('../../assets/images/module2/Mod2_04/mod2_q4_blood.png'), id: 3},
-				{title: 'forceps', bin: 'blueblack', img: require('../../assets/images/module2/Mod2_04/mod2_q4_forceps.png'), id: 4},
+				{title: 'forceps', bin: 'yellow', img: require('../../assets/images/module2/Mod2_04/mod2_q4_forceps.png'), id: 4},
 				{title: 'glove', bin: 'blueblack', img: require('../../assets/images/module2/Mod2_04/mod2_q4_glove.png'), id: 5},
 				{title: 'needle', bin: 'yellow', img: require('../../assets/images/module2/Mod2_04/mod2_q4_needle.png'), id: 6},
-				{title: 'pills',  bin: 'blueblack', img: require('../../assets/images/module2/Mod2_04/mod2_q4_pills.png'), id: 7},
+				{title: 'pills',  bin: 'yellow', img: require('../../assets/images/module2/Mod2_04/mod2_q4_pills.png'), id: 7},
 				{title: 'sharps', bin: 'yellow', img: require('../../assets/images/module2/Mod2_04/mod2_q4_sharps.png'), id: 8}
 			],
 			question4ImgsBins: [
-			    {title: 'blueblack', img: require('../../assets/images/module2/Mod2_04/mod2_q4_blueblack_bin.png'), id: 1},
+			  {title: 'blueblack', img: require('../../assets/images/module2/Mod2_04/mod2_q4_blueblack_bin.png'), id: 1},
 				{title: 'red', img: require('../../assets/images/module2/Mod2_04/mod2_q4_red_bin.png'), id: 2},
 				{title: 'yellow', img: require('../../assets/images/module2/Mod2_04/mod2_q4_yellow_bin.png'), id: 3}
-			]
+			],
+      question4Answers: {
+        blueblack: [],
+        red: [],
+        yellow: []
+      }
 		}
 	},
+  components: {
+    draggable
+  },
 	computed: {
 		interactive() {
 		    if(this.questionNumber === 4 ){
@@ -310,7 +338,32 @@ export default {
 			if (selectedAnswer) {
 				this.loadNextQuestion()
 				return
-			} 
+			}
+
+      // question 4 is a special case
+      if (this.questionNumber === 4 && this.answersTracker[this.questionNumber] && this.isFullObject(this.answersTracker[this.questionNumber])) {
+        if (Object.values(this.answersTracker[this.questionNumber]).indexOf('Wrong') > -1) {
+          this.$store.state.dialogError = true;
+          this.$store.state.errorTitle = 'Wrong';
+          this.$store.state.errorDescription = "Infectious waste goes in the yellow bin and includes gloves and medications. Sharps also go in the yellow bin and include, forceps. Highly Infectious waste goes into the red bin, which include pathogenic waste and blood. Non-Infectious waste goes in the blue/black bin.";
+        } else {
+          this.trackAnswers('Correct');
+          this.$store.state.dialogError = true;
+          this.$store.state.errorTitle = 'Correct';
+          this.$store.state.errorDescription = "";
+
+          this.accummulatedPoints++;
+        }
+
+        this.loadNextQuestion();
+        return;
+      } else if (this.questionNumber === 4) {
+        this.$store.state.dialogError = true;
+        this.$store.state.errorTitle = 'Incomplete.';
+        this.$store.state.errorDescription = "Please drag each item to a bin.";
+
+        return;
+      }
 
 			if (this.selectedParentChoice === null) {
 				if (this.questionNumber === 4 || this.questionNumber === 3 || this.questionNumber === 8 || this.questionNumber === 9){
@@ -533,27 +586,19 @@ export default {
 		        return o[x]!==''; 
 		    });
 		},
-		handleDragover(bin, data, event) {
-			let newData = data.split(",")
+		handleDragover(event) {
 			if (!this.answersTracker.hasOwnProperty(this.questionNumber)) {
-					this.answersTracker[this.questionNumber] = { ampule:'', biohazard:'', blood:'',forceps:'',glove:'' , needle:'' , pills:'', sharps:''}
-				}
-			if (bin === newData[1]) {
-		    	this.answersTracker[this.questionNumber][newData[0]] = 'Correct'
-		    } else {
-		    	this.answersTracker[this.questionNumber][newData[0]] = 'Wrong'
-		    }
-		    if(this.isFullObject(this.answersTracker[this.questionNumber])){
-		    	if (Object.values(this.answersTracker[this.questionNumber]).indexOf('Wrong') > -1) {
-				    this.$store.state.dialogError = true
-			    	this.$store.state.errorTitle = 'Wrong'
-			        this.$store.state.errorDescription = "An incorrect bin was chosen, a summary of your responses is given at the end of the game."
-				} else {
-					this.accummulatedPoints++
-				}
-		    	this.loadNextQuestion()
-		    }
-			
+				this.answersTracker[this.questionNumber] = { ampule: '', biohazard: '', blood: '', forceps: '', glove: '', needle: '', pills: '', sharps: '' };
+		  }
+
+      for (var i in this.question4Answers) {
+        let bin = this.question4Answers[i];
+
+        for (var j in bin) {
+          let result = bin[j].bin === i ? "Correct" : "Wrong";
+          this.answersTracker[this.questionNumber][bin[j].title] = result;
+        }
+      }
 		},
 		inRange(x, min, max) {
 		    return ((x-min)*(x-max) <= 0)	
@@ -741,4 +786,8 @@ export default {
 		width: 120px;
 		height: 120px;
 	}
+
+.items-list {
+  display: flex;
+}
 </style>
