@@ -263,6 +263,10 @@ export default {
 				{ PositionX1: 399, PositionY1: 91 },
 				{ PositionX2: 531, PositionY2: 91 }
 			],
+      question9count : 0,
+      question9Coordinates:[
+        { PositionX1: 447, PositionY1: 109 }
+      ],
 			question4Imgs: [
 			  {title: 'ampule',  bin: 'yellow' ,img: require('../../assets/images/module2/Mod2_04/mod2_q4_ampule.png'), id: 1},
 				{title: 'biohazard', bin: 'red',  img: require('../../assets/images/module2/Mod2_04/mod2_q4_biohazard.png'), id: 2},
@@ -629,110 +633,148 @@ export default {
 			
 		},
 		imageAnswers(e){
-			let questioncount
-			let questionCoordinates
+			let questioncount;
+			let questionCoordinates;
+
 			if (this.questionNumber === 3) {
 				questioncount = this.question3count
 				questionCoordinates = this.question3Coordinates
 			} else if (this.questionNumber === 8) {
 				questioncount = this.question8count
 				questionCoordinates = this.question8Coordinates
-			} else if (this.questionNumber === 9){
-				this.answersTracker[this.questionNumber] = {}
-				this.answersTracker[this.questionNumber]['B'] = 'Wrong'
-				this.loadNextQuestion()
-				return
+			} else if (this.questionNumber === 9) {
+        questioncount = this.question9count;
+        questionCoordinates = this.question9Coordinates;
+				this.answersTracker[this.questionNumber] = {};
+				this.answersTracker[this.questionNumber]['B'] = 'Wrong';
+
+        let message = null;
+				let imgPositions = this.getCoordinates(e);
+
+        if (this.inRange(imgPositions[0], (questionCoordinates[0].PositionX1 - 10), (questionCoordinates[0].PositionX1 + 10)) && this.inRange( imgPositions[1] ,(questionCoordinates[0].PositionY1 - 10),(questionCoordinates[0].PositionY1 + 10))) {
+          message = "Sorry, this is incorrect. Even though the dorsal slit is made at 12 o'clock position, as a qualified health care provider, you should notice that the scalpel is not used for crushing but cutting which will lead to more bleeding. Crushing is meant to reduce bleeding. A long artery forceps is used for crushing.";
+        } else {
+          message = "Sorry, this is incorrect. The dorsal slit is made at 12 o'clock position. As a qualified health care provider you should notice that the scalpel is not used crushing but cutting which will lead to more bleeding. Crushing is meant to reduce bleeding. A long artery forceps is used for crushing.";
+        }
+
+				this.$store.state.dialogError = true;
+		    this.$store.state.errorTitle = 'Error';
+		    this.$store.state.errorDescription = message;
+				this.loadNextQuestion();
+        return;
 			} else {
 				this.$store.state.dialogError = true
-		        this.$store.state.errorTitle = 'Error '
-		        this.$store.state.errorDescription = "No Question"
-		        return
+        this.$store.state.errorTitle = 'Error '
+        this.$store.state.errorDescription = "No Question"
+        return
 			}
+
 			if (questioncount > 2 ) {
 				this.$store.state.dialogError = true
-		        this.$store.state.errorTitle = 'Error '
-		        this.$store.state.errorDescription = "Already made your two choices"
-		        this.loadNextQuestion()
-			}else {
+		    this.$store.state.errorTitle = 'Error '
+		    this.$store.state.errorDescription = "Already made your two choices"
+		    this.loadNextQuestion()
+			} else {
 				if (!this.answersTracker.hasOwnProperty(this.questionNumber)) {
 					this.answersTracker[this.questionNumber] = {A:'' , B:''}
 				}
-				let imgPositions = this.getCoordinates(e)
-				if(this.inRange( imgPositions[0] ,(questionCoordinates[0].PositionX1 - 10),(questionCoordinates[0].PositionX1 + 10)) && this.inRange( imgPositions[1] ,(questionCoordinates[0].PositionY1 - 10),(questionCoordinates[0].PositionY1 + 10)) ){ 
+
+				let imgPositions = this.getCoordinates(e);
+
+				if (this.inRange(imgPositions[0], (questionCoordinates[0].PositionX1 - 10), (questionCoordinates[0].PositionX1 + 10)) && this.inRange( imgPositions[1] ,(questionCoordinates[0].PositionY1 - 10),(questionCoordinates[0].PositionY1 + 10)) ){ 
 					if (this.answersTracker[this.questionNumber]['A']){
 						this.answersTracker[this.questionNumber]['B'] = "Correct"
 					} else {
 						this.answersTracker[this.questionNumber]['A'] = "Correct"
 					}
+
 					if (this.questionNumber === 3) {
 						this.question3count++
 						questioncount++
 					} else if (this.questionNumber === 8) {
 						this.question8count++
 						questioncount++
-					} else {
+					} else if (this.questionNumber === 9) {
+            this.question9count++;
+            questioncount++;
+          } else {
 						this.$store.state.dialogError = true
-				        this.$store.state.errorTitle = 'Error '
-				        this.$store.state.errorDescription = "No Question Number"
+				    this.$store.state.errorTitle = 'Error '
+				    this.$store.state.errorDescription = "No Question Number A (" + this.questionNumber + ")";
 					}
-			   	} else if (this.inRange( imgPositions[0]  ,(questionCoordinates[1].PositionX2 - 10),(questionCoordinates[1].PositionX2 + 10)) && this.inRange( imgPositions[1]  ,(questionCoordinates[1].PositionY2 - 10),(questionCoordinates[1].PositionY2 + 10)) ) {
-			   		if (this.answersTracker[this.questionNumber]['A']){
+			  } else if (this.inRange( imgPositions[0]  ,(questionCoordinates[1].PositionX2 - 10),(questionCoordinates[1].PositionX2 + 10)) && this.inRange( imgPositions[1]  ,(questionCoordinates[1].PositionY2 - 10),(questionCoordinates[1].PositionY2 + 10)) ) {
+			   	if (this.answersTracker[this.questionNumber]['A']){
 						this.answersTracker[this.questionNumber]['B'] = "Correct"
 					} else {
 						this.answersTracker[this.questionNumber]['A'] = "Correct"
 					}
-			   		if (this.questionNumber === 3) {
+
+		   		if (this.questionNumber === 3) {
 						this.question3count++
 						questioncount++
 					} else if (this.questionNumber === 8) {
 						this.question8count++
 						questioncount++
+					} else if (this.questionNumber === 9) {
+						this.question9count++
+						questioncount++
 					} else {
 						this.$store.state.dialogError = true
-				        this.$store.state.errorTitle = 'Error '
-				        this.$store.state.errorDescription = "No Question Number"
+				    this.$store.state.errorTitle = 'Error '
+				    this.$store.state.errorDescription = "No Question Number B"
 					}
-			   	} else {
-		    		
-		    		if (this.answersTracker[this.questionNumber]['A']){
+			  } else {
+		    	if (this.answersTracker[this.questionNumber]['A']) {
 						this.answersTracker[this.questionNumber]['B'] = "Wrong"
 					} else {
 						this.answersTracker[this.questionNumber]['A'] = "Wrong"
 					}
+
 					if (this.questionNumber === 3) {
 						this.question3count++
 						questioncount++
 					} else if (this.questionNumber === 8) {
 						this.question8count++
 						questioncount++
+					} else if (this.questionNumber === 9) {
+						this.question9count++
+						questioncount++
 					} else {
 						this.$store.state.dialogError = true
-				        this.$store.state.errorTitle = 'Error '
-				        this.$store.state.errorDescription = "No Question Number"
-					}
-			   	}
-			   	if(questioncount >= 2){
-			   		if (this.questionNumber === 3) {
-			   			if (this.answersTracker[this.questionNumber]['A'] === "Wrong" || this.answersTracker[this.questionNumber]['B'] === "Wrong"){
-					   		this.$store.state.dialogError = true
-				    		this.$store.state.errorTitle = 'That is not correct, below is the correct answer'
-				    		this.$store.state.errorDescription = "The Dorsal Penile nerves at 1 o'clock and 11 o'clock Positions " 
-			    		} else {
-			    			this.accummulatedPoints++
-			    		}
-				   	} else {
-				   		if (this.answersTracker[this.questionNumber]['A'] === "Wrong" || this.answersTracker[this.questionNumber]['B'] === "Wrong"){
-					   		this.$store.state.dialogError = true
-				    		this.$store.state.errorTitle = 'That is not correct, below is the correct answer'
-				    		this.$store.state.errorDescription = "The Points at 3 o'clock and 9 o'clock Positions "
-				    	} else {
-				    		this.accummulatedPoints++
-				    	}
-				   	}
-
-			   		this.loadNextQuestion()
+		        this.$store.state.errorTitle = 'Error '
+		        this.$store.state.errorDescription = "No Question Number C"
 				}
+	   	}
 
+	   	if (questioncount >= 2) {
+	   		if (this.questionNumber === 3) {
+	   			if (this.answersTracker[this.questionNumber]['A'] === "Wrong" || this.answersTracker[this.questionNumber]['B'] === "Wrong") {
+			   		this.$store.state.dialogError = true
+		    		this.$store.state.errorTitle = 'That is not correct, below is the correct answer'
+		    		this.$store.state.errorDescription = "The Dorsal Penile nerves at 1 o'clock and 11 o'clock Positions " 
+	    		} else {
+	    			this.accummulatedPoints++
+	    		}
+		   	} else if (this.questionNumber === 8) {
+		   		if (this.answersTracker[this.questionNumber]['A'] === "Wrong" || this.answersTracker[this.questionNumber]['B'] === "Wrong"){
+			   		this.$store.state.dialogError = true
+		    		this.$store.state.errorTitle = 'That is not correct, below is the correct answer'
+		    		this.$store.state.errorDescription = "The Points at 3 o'clock and 9 o'clock Positions "
+		    	} else {
+		    		this.accummulatedPoints++
+		    	}
+		   	} else {
+          if (this.answersTracker[this.questionNumber]['A'] === "Wrong" || this.answersTracker[this.questionNumber]['B'] === "Wrong"){
+            this.$store.state.dialogError = true
+            this.$store.state.errorTitle = 'That is not correct, below is the correct answer'
+            this.$store.state.errorDescription = "The Points at 3 o'clock and 9 o'clock Positions "
+          } else {
+            this.accummulatedPoints++
+          }
+        }
+
+	   		this.loadNextQuestion()
+			}
 		}
 	}
 

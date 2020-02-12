@@ -209,7 +209,7 @@ module.exports = {
 		'situationText': 'Now that the foreskin is tight, crush with the scalpel where the first incision should be.',
 		'choices': [{
 			'choiceText': 'B. Pause procedure',
-			'comment': '',
+			'comment': 'Excellent, as a health care provider you should always be keen to use appropriate instrument designed for a specific task. A scalpel is designed for cutting and not crushing. Using a scapel for crushing will results to more bleeding while crushing is meant to reduce bleeding when the dorsal slit is made at 12 o\'clock position. ',
 			'correct': 'yes',
 			'impact': 1,
 			'bonus': 0
