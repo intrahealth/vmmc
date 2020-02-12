@@ -260,8 +260,8 @@ export default {
 			],
 			question8count : 0,
 			question8Coordinates:[
-				{ PositionX1: 337, PositionY1: 164 },
-				{ PositionX2: 577, PositionY2: 164 }
+				{ PositionX1: 399, PositionY1: 91 },
+				{ PositionX2: 531, PositionY2: 91 }
 			],
 			question4Imgs: [
 			  {title: 'ampule',  bin: 'yellow' ,img: require('../../assets/images/module2/Mod2_04/mod2_q4_ampule.png'), id: 1},
