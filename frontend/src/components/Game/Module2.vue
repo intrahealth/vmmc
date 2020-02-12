@@ -700,7 +700,7 @@ export default {
           } else {
 						this.$store.state.dialogError = true
 				    this.$store.state.errorTitle = 'Error '
-				    this.$store.state.errorDescription = "No Question Number A (" + this.questionNumber + ")";
+				    this.$store.state.errorDescription = "No Question Number";
 					}
 			  } else if (this.inRange( imgPositions[0]  ,(questionCoordinates[1].PositionX2 - 10),(questionCoordinates[1].PositionX2 + 10)) && this.inRange( imgPositions[1]  ,(questionCoordinates[1].PositionY2 - 10),(questionCoordinates[1].PositionY2 + 10)) ) {
 			   	if (this.answersTracker[this.questionNumber]['A']){
@@ -721,7 +721,7 @@ export default {
 					} else {
 						this.$store.state.dialogError = true
 				    this.$store.state.errorTitle = 'Error '
-				    this.$store.state.errorDescription = "No Question Number B"
+				    this.$store.state.errorDescription = "No Question Number"
 					}
 			  } else {
 		    	if (this.answersTracker[this.questionNumber]['A']) {
@@ -742,7 +742,7 @@ export default {
 					} else {
 						this.$store.state.dialogError = true
 		        this.$store.state.errorTitle = 'Error '
-		        this.$store.state.errorDescription = "No Question Number C"
+		        this.$store.state.errorDescription = "No Question Number"
 				}
 	   	}
 
