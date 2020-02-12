@@ -197,13 +197,27 @@ export default {
 	filters: {
 		formatClient (client) {
 			if (!client) {
-				return client
+				return client;
 			}
-			let cltArr = client.split('client')
+
+      switch (client) {
+        case "clientA":
+          return "Amani";
+
+        case "clientB":
+          return "Zabron";
+
+        case "clientC":
+          return "Anold";
+      }
+
+			let cltArr = client.split('client');
+
 			if (cltArr.length === 2) {
-				return 'Client ' + cltArr[1]
+				return 'Client ' + cltArr[1];
 			}
-			return client
+
+			return client;
 		}
 	},
 	methods: {
