@@ -141,6 +141,8 @@ app.post('/add-trainee', (req, res) => {
         endDate: fields.endDate,
         cadre: fields.cadre,
         trainingType: fields.trainingType,
+        region: fields.region,
+        district: fields.district,
         sessionId: fields.sessionId
       });
 

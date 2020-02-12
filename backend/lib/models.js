@@ -61,6 +61,14 @@ let Trainee = new mongoose.Schema({
     type: String,
     required: true
   },
+  district: {
+    type: String,
+    required: true
+  },
+  region: {
+    type: String,
+    required: true
+  },
   sessionId: {
     type: String,
     required: true
