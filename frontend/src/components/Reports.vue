@@ -54,7 +54,7 @@
           </v-menu>
         </v-flex>
         <v-spacer></v-spacer>
-        <v-flex xs2>
+        <v-flex xs1>
           <v-select
             :items="modules"
             v-model="gameModule"
@@ -62,7 +62,7 @@
           ></v-select>
         </v-flex>
         <v-spacer></v-spacer>
-        <v-flex xs2>
+        <v-flex xs1>
           <v-select
             :items="cadres"
             v-model="cadre"
@@ -70,7 +70,7 @@
           ></v-select>
         </v-flex>
         <v-spacer></v-spacer>
-        <v-flex xs2>
+        <v-flex xs1>
           <v-select
             :items="trainings"
             v-model="training"
@@ -78,7 +78,23 @@
           ></v-select>
         </v-flex>
         <v-spacer></v-spacer>
-        <v-flex xs2>
+        <v-flex xs1>
+          <v-select
+            :items="regions"
+            v-model="region"
+            label="Region"
+          ></v-select>
+        </v-flex>
+        <v-spacer></v-spacer>
+        <v-flex xs1>
+          <v-select
+            :items="districts[region]"
+            v-model="district"
+            label="District"
+          ></v-select>
+        </v-flex>
+        <v-spacer></v-spacer>
+        <v-flex xs1>
           <v-btn color="primary" round @click="getReport"><v-icon left>list</v-icon> View</v-btn>
         </v-flex>
         <v-spacer></v-spacer>
@@ -133,6 +149,10 @@
 <script>
 import axios from 'axios';
 import numeral from "numeral";
+
+import District from "@/mixins/District.js";
+import Region from "@/mixins/Region.js";
+
 let module1 = require('./questions/module1.js');
 let module2 = require('./questions/module2.js');
 
@@ -173,6 +193,8 @@ export default {
   },
   data() {
     return {
+      region: "",
+      district: "",
       cadres: [
         {text: "All", value: ""},
         {text: "Enrolled Nurse", value: "enrolled-nurse"},
@@ -284,10 +306,13 @@ export default {
         this.getModule2Report()
       }
     },
+    getQuery() {
+      return `startDate=${this.startDate}&endDate=${this.endDate}&cadre=${this.cadre}&trainingType=${this.training}&region=${this.region}&district=${this.district}`;
+    },
     getModule1Report() {
       this.report = [];
 
-      let query = `startDate=${this.startDate}&endDate=${this.endDate}&cadre=${this.cadre}&trainingType=${this.training}`;
+      let query = this.getQuery();
 
       axios.get(backendServer + `/getModule1Report?${query}`).then(response => {
         let numCompleted = 0;
@@ -385,7 +410,7 @@ export default {
       });
     },
     getModule2Report() {
-      let query = `startDate=${this.startDate}&endDate=${this.endDate}&cadre=${this.cadre}&trainingType=${this.training}`;
+      let query = this.getQuery();
 
       axios.get(backendServer + `/getModule2Report?${query}`).then(response => {
         let questionData = [];
@@ -467,5 +492,6 @@ export default {
       this.endDateFormatted = this.formatDate(this.endDate)
     }
   },
+  mixins: [District, Region]
 };
 </script>

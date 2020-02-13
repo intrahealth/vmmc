@@ -60,7 +60,7 @@ export default {
 #gameContent {
   border-radius: 30px;
   border: 3px solid #7ce5f8;
-  width: 1000px;
+  width: 1200px;
   height: auto;
 	min-height: 350px
 }
