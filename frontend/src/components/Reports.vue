@@ -375,7 +375,7 @@ export default {
           for (var j in questions.module1[clientId]) {
             questionData[clientId].push({
               question: questions.module1[clientId][j].question,
-              percent: numeral(questions.module1[clientId][j].attempted / questions.module1[clientId][j]).format("0.00%")
+              percent: numeral(questions.module1[clientId][j].correct / questions.module1[clientId][j].attempted).format("0.00%")
             });
           }
         }
