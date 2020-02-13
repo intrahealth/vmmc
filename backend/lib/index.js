@@ -382,8 +382,18 @@ app.get('/getModule1Report', (req, res) => {
   let endDate = req.query.endDate + 'T23:59:59';
   let cadre = req.query.cadre;
   let training = req.query.trainingType;
+  let district = req.query.district;
+  let region = req.query.region;
 
   let personQuery = {};
+
+  if (district) {
+    personQuery.district = district;
+  }
+
+  if (region) {
+    personQuery.region = region;
+  }
 
   if (cadre) {
     personQuery.cadre = cadre;
@@ -435,8 +445,18 @@ app.get('/getModule2Report', (req, res) => {
   let endDate = req.query.endDate + 'T23:59:59';
   let cadre = req.query.cadre;
   let training = req.query.trainingType;
+  let district = req.query.district;
+  let region = req.query.region;
 
   let personQuery = {};
+
+  if (district) {
+    personQuery.district = district;
+  }
+
+  if (region) {
+    personQuery.region = region;
+  }
 
   if (cadre) {
     personQuery.cadre = cadre;
