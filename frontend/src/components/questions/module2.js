@@ -290,7 +290,7 @@ module.exports = {
 		},
 		{
 			'choiceText': 'C. Vertical mattress suture',
-			'comment': "Sorry, this is incorrect. Vertical mattress sutures are placed at 3 o'clock, 9 o'clock and 12 o'clock positions.",
+			'comment': "Sorry, this is incorrect. If you use the vertical mattress sutures, you are likely to injure the urethra.",
 			'correct': 'no',
 			'impact': 0,
 			'bonus': 0
