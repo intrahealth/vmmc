@@ -265,7 +265,7 @@ export default {
 			],
       question9count : 0,
       question9Coordinates:[
-        { PositionX1: 447, PositionY1: 109 }
+        { PositionX1: 82, PositionY1: 115 }
       ],
 			question4Imgs: [
 			  {title: 'ampule',  bin: 'yellow' ,img: require('../../assets/images/module2/Mod2_04/mod2_q4_ampule.png'), id: 1},
