@@ -272,7 +272,7 @@ export default {
 				{title: 'biohazard', bin: 'red',  img: require('../../assets/images/module2/Mod2_04/mod2_q4_biohazard.png'), id: 2},
 				{title: 'blood', bin: 'red', img: require('../../assets/images/module2/Mod2_04/mod2_q4_blood.png'), id: 3},
 				{title: 'forceps', bin: 'yellow', img: require('../../assets/images/module2/Mod2_04/mod2_q4_forceps.png'), id: 4},
-				{title: 'glove', bin: 'blueblack', img: require('../../assets/images/module2/Mod2_04/mod2_q4_glove.png'), id: 5},
+				{title: 'glove', bin: 'yellow', img: require('../../assets/images/module2/Mod2_04/mod2_q4_glove.png'), id: 5},
 				{title: 'needle', bin: 'yellow', img: require('../../assets/images/module2/Mod2_04/mod2_q4_needle.png'), id: 6},
 				{title: 'pills',  bin: 'yellow', img: require('../../assets/images/module2/Mod2_04/mod2_q4_pills.png'), id: 7},
 				{title: 'sharps', bin: 'yellow', img: require('../../assets/images/module2/Mod2_04/mod2_q4_sharps.png'), id: 8}
