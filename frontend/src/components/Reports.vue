@@ -168,7 +168,7 @@ export default {
     };
 
     for (var clientId in module1) {
-      let client = {};        
+      let client = {};
 
       for (var j in module1[clientId]) {
         client[j] = {
@@ -334,6 +334,7 @@ export default {
 
         this.reportRun = true;
         this.moduleName = "Module 1";
+        this.resetQuestionCount();
 
         for (var i in response.data) {
           fullyComplete = true;
@@ -421,6 +422,7 @@ export default {
 
         this.reportRun = true;
         this.moduleName = "Module 2";
+        this.resetQuestionCount();
 
         for (var i in response.data) {
           let submission = response.data[i];
