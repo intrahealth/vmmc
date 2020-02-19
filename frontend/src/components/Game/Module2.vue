@@ -69,9 +69,9 @@
 						</v-layout>
 					</v-toolbar>
 				</v-flex>
-				<v-flex xs4>
-					<div class="questionImg" v-if="questionNumber === 3" @click="imageAnswers" >
-						<v-img :src="getImgUrl()" contain max-height="450" height="250"></v-img>
+        <v-flex xs4>
+					<div v-if="questionNumber === 3" @click="imageAnswers" >
+						<v-img max-width="200" :src="getImgUrl()" contain max-height="450" height="250"></v-img>
 					</div>
 					<div class="questionImg" v-else-if="questionNumber === 4" >
 						<div>ITEMS
@@ -86,7 +86,7 @@
               </draggable>
 						</div>
 
-						<div height="20px" >							
+						<div height="20px" >
 						</div>
 
 						<div>
@@ -108,10 +108,10 @@
 						</div>
 					</div>
 					<div class="questionImg" v-else-if="questionNumber === 8" @click="imageAnswers">
-						<v-img :src="getImgUrl()" alt="Question Image" contain max-height="450" height="250"></v-img>
+						<v-img max-width="200" :src="getImgUrl()" alt="Question Image" contain max-height="450" height="250"></v-img>
 					</div>
 					<div class="questionImg" v-else-if="questionNumber === 9" @click="imageAnswers">
-						<v-img :src="getImgUrl()" alt="Question Image" contain max-height="450" height="250"></v-img>
+						<v-img max-width="200" :src="getImgUrl()" alt="Question Image" contain max-height="450" height="250"></v-img>
 					</div>
 					<div class="questionImg" v-else-if="questionNumber === 12 || questionNumber === 13" >
 						<v-img :aspect-ratio="16/9" :src="getImgUrl()" alt="Question Image" max-height="450" height="250" width="400"></v-img>
@@ -140,11 +140,11 @@
 											<template v-for="(choice,index) in choices">
 												<v-radio-group v-model="selectedParentChoice" @change="choiceSelected()">
 													<label style="cursor: pointer;">
-														<v-radio 
-															style="font-weight: bold;color: black" 
-															:ref="'choice' + index" 
-															:label="choice.choiceText" 
-															:value="index" 
+														<v-radio
+															style="font-weight: bold;color: black"
+															:ref="'choice' + index"
+															:label="choice.choiceText"
+															:value="index"
 															color="red">
 														</v-radio>
 													</label>
@@ -152,12 +152,12 @@
                         <template v-if="choice.hasOwnProperty('choices') && showSubChoices" v-for="(pausedChoice,subIndex) in choice.choices">
                           <v-radio-group style="margin-left: 40px" v-model="selectedChildChoice">
                             <label style="cursor: pointer;">
-                              <v-radio 
-																:disabled="radioDisabled" 
-																style="font-weight: bold;color: black" 
-																:ref="'subChoice' + subIndex" 
-																:label="pausedChoice.choiceText" 
-																:value="subIndex" 
+                              <v-radio
+																:disabled="radioDisabled"
+																style="font-weight: bold;color: black"
+																:ref="'subChoice' + subIndex"
+																:label="pausedChoice.choiceText"
+																:value="subIndex"
 																color="red">
 															</v-radio>
                             </label>
@@ -255,13 +255,13 @@ export default {
 			},
 			question3count : 0,
 			question3Coordinates:[
-				{ PositionX1: 460, PositionY1: 95},
-				{ PositionX2: 493, PositionY2: 95 }
+				{ PositionX1: 81, PositionY1: 95},
+				{ PositionX2: 126, PositionY2: 95 }
 			],
 			question8count : 0,
 			question8Coordinates:[
-				{ PositionX1: 399, PositionY1: 91 },
-				{ PositionX2: 531, PositionY2: 91 }
+				{ PositionX1: 31, PositionY1: 91 },
+				{ PositionX2: 153, PositionY2: 91 }
 			],
       question9count : 0,
       question9Coordinates:[
@@ -383,7 +383,7 @@ export default {
 				    	this.$store.state.dialogError = true
 						this.$store.state.errorTitle = 'Error'
 						this.$store.state.errorDescription = 'Drag All items to the Corresponding Bin'
-						return	
+						return
 				    } else {
 				    	this.$store.state.dialogError = true
 						this.$store.state.errorTitle = 'Error'
@@ -396,7 +396,7 @@ export default {
 					this.$store.state.errorDescription = 'Select an answer to proceed'
 					return
 				}
-				
+
 			} else if (this.choices[this.selectedParentChoice].hasOwnProperty('choices') && this.selectedChildChoice === null) {
 					this.$store.state.dialogError = true
 					this.$store.state.errorTitle = 'Error'
@@ -435,7 +435,7 @@ export default {
 			if (this.questionNumber === 3) {
 		   		this.$store.state.dialogError = true
 	    		this.$store.state.errorTitle = 'That is not correct, below is the correct answer'
-	    		this.$store.state.errorDescription = "The Dorsal Penile nerves at 1 o'clock and 11 o'clock Positions " 
+	    		this.$store.state.errorDescription = "The Dorsal Penile nerves at 1 o'clock and 11 o'clock Positions "
 			} else if (this.questionNumber === 8) {
 				this.$store.state.dialogError = true
 	    		this.$store.state.errorTitle = 'That is not correct, below is the correct answer'
@@ -476,7 +476,7 @@ export default {
 				this.answersTracker[this.questionNumber] = {}
 			}
 			if (this.questionNumber !== 4) {
-				
+
 				if (this.choices[this.selectedParentChoice].correct === 'no') {
 					choiceCorrectness = 'Wrong'
 				}
@@ -487,7 +487,7 @@ export default {
 				if (this.selectedChildChoice === null) {
 					this.answersTracker[this.questionNumber][choiceLetter] = choiceCorrectness
 				}
-				
+
 				if (this.selectedChildChoice !== null) {
 					let subChoiceLetter = this.subChoicesLetters[this.selectedChildChoice]
 					if (!this.answersTracker[this.questionNumber].hasOwnProperty(choiceLetter)) {
@@ -496,7 +496,7 @@ export default {
 					this.answersTracker[this.questionNumber][choiceLetter]['parent'] = choiceCorrectness
 					this.answersTracker[this.questionNumber][choiceLetter][subChoiceLetter] = subChoiceCorrectness
 				}
-			} 
+			}
 		},
 		loadPrevQuestion () {
 			if (this.prevQuestion === null) {
@@ -580,14 +580,14 @@ export default {
 			} else if (this.questionNumber === 15) {
 				return require('../../assets/images/module2/' + this.questionImg.question15 )
 			}
-			
+
 		},
 		concatinateData(title,bin){
 			return title + ',' + bin
 		},
 		isFullObject(o) {
 		    return Object.keys(o).every(function(x) {
-		        return o[x]!==''; 
+		        return o[x]!=='';
 		    });
 		},
 		handleDragover(event) {
@@ -605,7 +605,7 @@ export default {
       }
 		},
 		inRange(x, min, max) {
-		    return ((x-min)*(x-max) <= 0)	
+		    return ((x-min)*(x-max) <= 0)
 		},
 		getCoordinates(e){
 			let ImgPosX = 0
@@ -617,7 +617,7 @@ export default {
 			while(el){
 			    ImgPosX += el.offsetLeft
 			    ImgPosY += el.offsetTop
-			    el = el.offsetParent	
+			    el = el.offsetParent
 			}
 			if (e.pageX || e.pageY){
 			    PosX = e.pageX
@@ -626,11 +626,12 @@ export default {
 			else if (e.clientX || e.clientY){
 			    PosX = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft
 			    PosY = e.clientY + document.body.scrollTop + document.documentElement.scrollTop
-			    }
+			}
+
 			PosX = PosX - ImgPosX
 		    PosY = PosY - ImgPosY
 		    return [ PosX, PosY ]
-			
+
 		},
 		imageAnswers(e){
 			let questioncount;
@@ -681,7 +682,7 @@ export default {
 
 				let imgPositions = this.getCoordinates(e);
 
-				if (this.inRange(imgPositions[0], (questionCoordinates[0].PositionX1 - 10), (questionCoordinates[0].PositionX1 + 10)) && this.inRange( imgPositions[1] ,(questionCoordinates[0].PositionY1 - 10),(questionCoordinates[0].PositionY1 + 10)) ){ 
+				if (this.inRange(imgPositions[0], (questionCoordinates[0].PositionX1 - 10), (questionCoordinates[0].PositionX1 + 10)) && this.inRange( imgPositions[1] ,(questionCoordinates[0].PositionY1 - 10),(questionCoordinates[0].PositionY1 + 10)) ){
 					if (this.answersTracker[this.questionNumber]['A']){
 						this.answersTracker[this.questionNumber]['B'] = "Correct"
 					} else {
@@ -751,7 +752,7 @@ export default {
 	   			if (this.answersTracker[this.questionNumber]['A'] === "Wrong" || this.answersTracker[this.questionNumber]['B'] === "Wrong") {
 			   		this.$store.state.dialogError = true
 		    		this.$store.state.errorTitle = 'That is not correct, below is the correct answer'
-		    		this.$store.state.errorDescription = "The Dorsal Penile nerves at 1 o'clock and 11 o'clock Positions " 
+		    		this.$store.state.errorDescription = "The Dorsal Penile nerves at 1 o'clock and 11 o'clock Positions "
 	    		} else {
 	    			this.accummulatedPoints++
 	    		}
@@ -778,7 +779,7 @@ export default {
 		}
 	}
 
-			
+
 	},
 	created: function () {
 		this.sessionID = uuid.v4()
