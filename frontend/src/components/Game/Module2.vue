@@ -354,7 +354,7 @@ export default {
           this.trackAnswers('Correct');
           this.$store.state.dialogError = true;
           this.$store.state.errorTitle = 'Correct';
-          this.$store.state.errorDescription = "";
+          this.$store.state.errorDescription = "Excellent! Infectious waste goes in the yellow bin and includes gloves and medications. Sharps also go in the yellow bin and include, forceps. Highly Infectious waste goes into the red bin, which include pathogenic waste and blood. Non-Infectious waste goes in the blue/black bin.";
 
           this.accummulatedPoints++;
         }
@@ -754,6 +754,9 @@ export default {
 		    		this.$store.state.errorTitle = 'That is not correct, below is the correct answer'
 		    		this.$store.state.errorDescription = "The Dorsal Penile nerves at 1 o'clock and 11 o'clock Positions "
 	    		} else {
+			   		this.$store.state.dialogError = true
+		    		this.$store.state.errorTitle = 'Correct';
+		    		this.$store.state.errorDescription = "Correct! Using a small 23 to 27-gauge 3-4 cm long needle, give two injections at 11 o'clock and 1 o'clock positions on the dorsum of the penis in the subpubic angle. The needle should be directed at 45 degrees to the shaft, as this improves the success rate of the block and reduces the risk of injury to the underlying penile structures.";
 	    			this.accummulatedPoints++
 	    		}
 		   	} else if (this.questionNumber === 8) {
@@ -762,6 +765,9 @@ export default {
 		    		this.$store.state.errorTitle = 'That is not correct, below is the correct answer'
 		    		this.$store.state.errorDescription = "The Points at 3 o'clock and 9 o'clock Positions "
 		    	} else {
+			   		this.$store.state.dialogError = true
+		    		this.$store.state.errorTitle = 'Correct';
+		    		this.$store.state.errorDescription = "Excellent, artery forceps are placed at the 3 and 9 o'clock positions making sure that not too much tension is applied.";
 		    		this.accummulatedPoints++
 		    	}
 		   	} else {
