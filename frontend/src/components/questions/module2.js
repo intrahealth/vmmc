@@ -62,14 +62,6 @@ module.exports = {
 	},
 	'2': {
 		'situationText': 'The penile nerve block with required anesthesia to be injected at two positions. Click on both appropriate areas in the diagram provided. ',
-		'choices': [{
-			'choiceText': 'B. Pause procedure',
-			'comment': "Sorry, incorrect.  Using a small 23 to 27-gauge 3-4 cm long needle, give two injections at 11 o'clock and 1 o'clock positions on the dorsum of the penis in the subpubic angle. The needle should be directed at 45 degrees to the shaft , as this improves the success rate of the block and reduces the risk of injury to the underlying penile structures.",
-			'correct': 'no',
-			'impact': 0,
-			'bonus': 0
-		}
-		],
 		'nextMove': 3,
 		'prevMove': 1
 	},
