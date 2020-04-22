@@ -188,8 +188,6 @@ const config = require('../../config');
 const isProduction = process.env.NODE_ENV === 'production';
 const backendServer = (isProduction ? config.build.backend : config.dev.backend);
 
-console.log(backendServer);
-
 export default {
   validations: {
     startDate: { required },
