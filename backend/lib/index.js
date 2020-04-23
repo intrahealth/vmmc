@@ -328,8 +328,6 @@ app.post('/saveModule1Answers', (req, res) => {
 app.post('/saveModule2Answers', (req, res) => {
   const form = new formidable.IncomingForm();
   form.parse(req, (err, fields, files) => {
-    console.log(fields);
-
     if (mongoUser && mongoPasswd) {
       var uri = `mongodb://${mongoUser}:${mongoPasswd}@${mongoHost}:${mongoPort}/${database}`;
     } else {
