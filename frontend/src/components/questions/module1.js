@@ -73,7 +73,7 @@ module.exports = {
       "prevMove": 2
     },
     "4": {
-      "situationText": "Amani returns with his CTC card. What additional counseling do you need to provide before the procedure?",
+      "situationText": "What additional counseling do you need to provide before the procedure?",
       "choices": [{
         "choiceText": "A. Information on risks of surgery, discussion on partner risks and wound care.",
         "comment": "In a calm, informative tone before surgery, the health care provider should provide the client with all the necessary information about the procedure.  Provide accurate information on possible complications and post operative instructions.  Although complications are rare, bleeding, severe pain in the penis/genital area, inability to pass urine and increased swelling and discharge or pus from the surgical wound can occur.   If a problem develops, the client should return to the facility/site or seek emergency care.  Post operative instructions on wound care should emphasize maintaining proper hygiene, wearing clean underware to be changed daily, and taking a bath.  Educate the client on other HIV prevention strategies i.e  ABC apprroach, A-Abstinence, B-Being faithful, C- Consistent correct use of condoms.",
