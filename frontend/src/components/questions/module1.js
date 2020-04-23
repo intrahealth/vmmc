@@ -329,7 +329,7 @@ module.exports = {
       "prevMove": 2
     },
     "4": {
-      "situationText": "One of the students (above 17 years) during group education asks if he can get MC services without being tested for HIV. As a counselor, what will you do?",
+      "situationText": "One of the students (17 years) during group education asks if he can get MC services without being tested for HIV. As a counselor, what will you do?",
       "choices": [{
         "choiceText": "A. Tell him that MC services will not be given. HIV testing is a must. ",
         "comment": "This is incorrect.  HIV testing is an opt-out approach in MC services. As a health care provider, explain to the young man that HTS is an important component in VMMC program. Men are encouraged to know their HIV status so that they can make informed health choices. Although HTS is an opt-out services, inform the young man that the government has HIV screening tool for all boys 19yrs and below. Only those considered eligible (at risk of HIV) will be offered HTS services.",
