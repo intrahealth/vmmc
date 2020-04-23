@@ -521,8 +521,9 @@ export default {
 				this.gameRunning = true
 			} else {
 				// save prev response into database
-				let formData = new FormData()
-				formData.append('traineeId', this.$store.state.auth.traineeId)
+				let formData = new FormData();
+
+				formData.append('traineeID', this.$store.state.traineeId)
 				formData.append('sessionID', this.sessionID)
 				formData.append('answers', JSON.stringify(this.answersTracker))
 				formData.append('accummulatedPoints', this.accummulatedPoints)
