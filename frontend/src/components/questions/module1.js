@@ -257,7 +257,7 @@ module.exports = {
   },
   "clientC": {
     "0": {
-      "situationText": "A day school teacher from the local primary school comes with 15 students who are at standard six and seven, aged between 14-16 years old for VMMC services. He says he will sign a consent form for them. As the counselor what will you do?",
+      "situationText": "A day school teacher from the local primary school comes with 15 students who are at standard six and seven, aged between 15-17 years old for VMMC services. He says he will sign a consent form for them. As the counselor what will you do?",
       "choices": [{
         "choiceText": "A. You agree for him to sign consent and you thank him for coming with so many clients and you request him to come with more clients as they are important for the program to reach targets.",
         "comment": "This is not appropriate or allowed. As a health provider, inform the teacher that all clients below 18yrs need have their parents / guardians consent on their behalf. The provider should make sure that the guardian / parent understsands the benefits and potential risks associated with MC and what their responsibility regarding post MC wound care and follow-up.<br><br>The teacher should be appreciated for the efforts s/he has made, but s/he should be told that only guardians / parents are eligible to provide consent.",
