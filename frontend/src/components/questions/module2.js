@@ -3,14 +3,14 @@ module.exports = {
 		'situationText': 'Your assistant is about to prepare the skin with iodine antiseptic solution, however you remember that the client is allergic to iodine. Instead, you tell your assistant to use:',
 		'choices': [{
 			'choiceText': 'A. Isopropyl alcohol',
-			'comment': 'Sorry, incorrect.  For clients who are allergic to Iodine, chlorhexidine gluconate is recommended in skin preparation. ',
+			'comment': 'Sorry, that is an incorrect answer.  For clients who are allergic to Iodine, chlorhexidine gluconate is recommended in skin preparation.',
 			'correct': 'no',
 			'impact': 0,
 			'bonus': 0
 		},
 		{
 			'choiceText': 'B. Dilute the iodine solution with isopropyl alcohol in 1:2 ratio',
-			'comment': 'Sorry, incorrect.  For clients who are allergic to Iodine, chlorhexidine gluconate is recommended in skin preparation. The health care provider should inquire from the client or parent/guardian about the history of  allergic reactions iodine solution prior to the procedure.',
+			'comment': 'Sorry, that is an incorrect answer.  For clients who are allergic to Iodine, chlorhexidine gluconate is recommended in skin preparation. The healthcare provider should inquire from the client or parent/guardian about the history of  allergic reactions iodine solution prior to the procedure.',
 			'correct': 'no',
 			'impact': 0,
 			'bonus': 0
@@ -24,7 +24,7 @@ module.exports = {
 		},
 		{
 			'choiceText': 'D. None of the antiseptics are suitable.',
-			'comment': 'Sorry, incorrect.  For clients who are allergic to Iodine, chlorhexidine gluconate is recommended in skin preparation.',
+			'comment': 'Sorry, that is an incorrect answer.  For clients who are allergic to Iodine, chlorhexidine gluconate is recommended in skin preparation.',
 			'correct': 'no',
 			'impact': 0,
 			'bonus': 0
@@ -34,24 +34,24 @@ module.exports = {
 		'prevMove': null
 	},
 	'1': {
-		'situationText': 'The client’s skin has now been prepared and properly draped.You are ready to administer the anesthesia. Your assistant hands you the needle and vial. You…',
+		'situationText': 'The client’s skin has now been prepared and properly draped. You are ready to administer the anesthesia. Your assistant hands you the needle and vial. You…',
 		'choices': [{
 			'choiceText': "A. You take the appropriate amount of anesthetic into the needle and inject at the site of the twin dorsal nerves (1 o'clock and 11 o'clock positions).",
-			'comment': 'Sorry, incorrect. The procedure of drawing the anesthetic agent should be aseptic. ',
+			'comment': 'Sorry, that is an incorrect answer. You must also check the vial(s) of local anaesthetic to ensure that the correct agent and correct concentration have been selected, that the vial is free of contamination, and that the agent is not beyond the expiry date. Additionally, to ensure aseptic technique is observed when drawing the local anaesthesia, the assistant should hold the vial while the surgeon is drawing the anaesthesia.',
 			'correct': 'no',
 			'impact': 0,
 			'bonus': 0
 		},
 		{
 			'choiceText': 'B. You check the vial of anesthetic to ensure the correct agent at the correct concentration has been selected.',
-			'comment': 'Sorry, incorrect answer!  Though it is important before the health care provider administer Local anaesthesia  they must check the vial(s) of local anaesthetic to ensure that the correct agent and correct concentration has been selected, that the vial is free of contamination, and that the agent is not beyond the expiry date.',
+			'comment': 'Sorry, that is an incomplete answer.  Though this is an important step to take before administering the local anaesthesia, you must also check the vial(s) of local anaesthetic to ensure that the correct agent and correct concentration has been selected, that the vial is free of contamination, and that the agent is not beyond the expiry date. Additionally, to ensure aseptic technique is observed when drawing the local anaesthesia, the assistant should hold the vial while the surgeon is drawing the anaesthesia.',
 			'correct': 'no',
 			'impact': 0,
 			'bonus': 0
 		},
 		{
 			'choiceText': 'C. Pause procedure',
-			'comment': 'Correct! To ensure aseptic technique is observed when drawing the local anaesthesia, the assistant should hold the vial while the surgeon is drawing the anaesthesia.',
+			'comment': 'Correct! The procedure of drawing the anesthetic agent should be aseptic.  You must also check the vial(s) of local anaesthetic to ensure that the correct agent and correct concentration has been selected, that the vial is free of contamination, and that the agent is not beyond the expiry date. To ensure aseptic technique is observed when drawing the local anaesthesia, the assistant should hold the vial while the surgeon draws the anaesthesia.',
 			'correct': 'yes',
 			'impact': 1,
 			'bonus': 0
@@ -61,7 +61,7 @@ module.exports = {
 		'prevMove': 0
 	},
 	'2': {
-		'situationText': 'The penile nerve block with required anesthesia to be injected at two positions. Click on both appropriate areas in the diagram provided. ',
+		'situationText': 'The penile nerve block with required anesthesia must be injected at two positions. Click on both appropriate areas in the diagram provided.',
 		'nextMove': 3,
 		'prevMove': 1
 	},
@@ -69,7 +69,7 @@ module.exports = {
 		'situationText': 'Place each item in the correct colored bin',
 		'choices': [{
 			'choiceText':'Blue/black bin: gloves, disposable forceps, expired medication',
-			'comment': 'The Health care provider shall segregate waste to protect personnel from injury and infection by preventing hazardous waste entering inappropriate waste streams. Segregation of healthcare waste shall be done at generation point and is the responsibility of the person/institution that generate it.The segregation of healthcare waste shall consist of separating different waste materials based on the type, treatment and disposable/recyclable options. The waste categories: non infectious waste (BLUE/BLACK) and wastes to be disposed include paper, packaging materials, plastic bottles, food remains, boxes and cartons.',
+			'comment': 'The Healthcare provider shall segregate waste to protect personnel from injury and infection by preventing hazardous waste entering inappropriate waste streams. Segregation of healthcare waste shall be done at generation point and is the responsibility of the person/institution that generates it.The segregation of healthcare waste shall consist of separating different waste materials based on the type, treatment and disposable/recyclable options. The waste categories: non infectious waste (BLUE/BLACK) and wastes to be disposed include paper, packaging materials, plastic bottles, food remains, boxes and cartons.',
 			'correct': 'yes',
 			'impact': 1,
 			'bonus': 1
@@ -93,7 +93,7 @@ module.exports = {
 		'prevMove': 2
 	},
 	'4': {
-		'situationText': 'Despite injecting the anesthetic, the patient continues to show signs of discomfort and pain. Review the actions below and select the box for best practice. The patient weighs 40 kg. How much lidocaine at 2% anesthetic do you use?',
+		'situationText': 'Despite already receiving the anesthetic, the patient continues to show signs of discomfort and pain. The patient weighs 40 kg. How much plain lignocaine at 2% anesthetic do you use?',
 		'choices': [{
 			'choiceText': 'A. 0.9 ml',
 			'comment': 'Sorry, incorrect.  You use 6 ml. The starting dose of 2% Plain Lignocaine is 1.5 mg/kg with 0.3 mg/kg Bupivacaine 0.5%.The maximum safe dose is 2mg per kg body weight of Lignocaine 2% with 0.5mg per kg body weight of Bupivacaine 0.5%. ',
@@ -171,7 +171,7 @@ module.exports = {
 		},
 		{
 			'choiceText': 'C. Sponge-holding forceps',
-			'comment': 'Sorry, incorrect. the sponge holding forceps is used for holding swabs and sponges in the medical procedures. They also enable the surgeon to move the tissues gently. To retract the foreskin the artery forceps should be used to provide equal tensions between the inner and outer aspects of the foreskin.',
+			'comment': 'Sorry, that is an incorrect answer. The sponge holding forceps is used for holding swabs and sponges in the medical procedures. They also enable the surgeon to move the tissues gently. To retract the foreskin the Artery forceps should be used to provide equal tensions between the inner and outer aspects of the foreskin.',
 			'correct': 'no',
 			'impact': 0,
 			'bonus': 0
@@ -181,15 +181,7 @@ module.exports = {
 		'prevMove': 5
 	},
 	'7': {
-		'situationText': 'Click on the foreskin the two locations where you would place the artery forceps to provide sufficient tension on the inside and outside surfaces of the foreskin.',
-		'choices': [{
-			'choiceText': 'B. Pause procedure',
-			'comment': "Sorry, this is incorrect. The artery forceps are the instruments at 3 and 9 o'clock positions are used to provide equal tension to both inner and outer aspects of the foreskin.",
-			'correct': 'no',
-			'impact': 0,
-			'bonus': 0
-		}
-		],
+		'situationText': 'Click on the foreskin at the two locations where you would place the Artery forceps to provide sufficient tension on the inside and outside surfaces of the foreskin.',
 		'nextMove': 8,
 		'prevMove': 6
 	},
@@ -197,7 +189,7 @@ module.exports = {
 		'situationText': 'Now that the foreskin is tight, crush with the scalpel where the first incision should be.',
 		'choices': [{
 			'choiceText': 'B. Pause procedure',
-			'comment': 'Excellent, as a health care provider you should always be keen to use appropriate instrument designed for a specific task. A scalpel is designed for cutting and not crushing. Using a scapel for crushing will results to more bleeding while crushing is meant to reduce bleeding when the dorsal slit is made at 12 o\'clock position. ',
+			'comment': 'Excellent, as a healthcare provider you should always be keen to use the appropriate instrument designed for a specific task. A scalpel is designed for cutting and not crushing. Using a scalpel for crushing will result in more bleeding, while crushing is meant to reduce bleeding when the dorsal slit is made at 12 o\'clock position.',
 			'correct': 'yes',
 			'impact': 1,
 			'bonus': 0
@@ -210,21 +202,21 @@ module.exports = {
 		'situationText': 'You drop an instrument and it lands on the ground, now what?',
 		'choices': [{
 			'choiceText': 'A. Ask assistant to pick up the instrument and fetch a new one',
-			'comment': 'Sorry, this is incorrect.  An assistant should observe all procautions and remain sterile throughout the procedure. Fetching the instrument will contaminate the assistant and make the procedure not sterile anymore which leads to infected surgical wound. The runner is responsible with picking the instrument and placing it at the appropriate area for decontamination and sterilization.',
+			'comment': 'Sorry, this is incorrect.  An assistant should observe all precautions and remain sterile throughout the procedure. Fetching the instrument will contaminate the assistant and make the procedure not sterile anymore which leads to infected surgical wounds. The runner is responsible for picking the instrument and placing it at the appropriate area for decontamination and sterilization.',
 			'correct': 'no',
 			'impact': -1,
 			'bonus': 0
 		},
 		{
 			'choiceText': 'B. Ask the runner to pick up the instrument, place it in the bucket of soiled equipment to soak and ask your assistant for a sterile tool',
-			'comment': 'Excellent.  A working environment should be made as much sterile as possible. Any contaminated instrument should be removed from thr procedure area and kept in separate bucket for decontamination and sterilization before being reused.',
+			'comment': 'Excellent.  A working environment should be made as sterile as possible. Any contaminated instrument should be removed from the procedure area and kept in a separate bucket for decontamination and sterilization before being reused.',
 			'correct': 'yes',
 			'impact': 1,
 			'bonus': 0
 		},
 		{
 			'choiceText': 'C. Leave the instrument on the ground',
-			'comment': 'Sorry, this is incorrect.  Leaving a dropped instrument unattended might lead to accident within the operating room. The runner is responsible with picking the instrument and placing it at the appropriate area for decontamination and sterilization.',
+			'comment': 'Sorry, this is incorrect.  Leaving a dropped instrument unattended might lead to an accident within the operating room. The runner is responsible for picking up the instrument and placing it at the appropriate area for decontamination and sterilization.',
 			'correct': 'no',
 			'impact': 0,
 			'bonus': 0
@@ -237,21 +229,21 @@ module.exports = {
 		'situationText': 'The rest of the foreskin was cut free, leaving 5mm of skin proximal to the corona. To clip any bleeding vessels, you ask your assistant for…',
 		'choices': [{
 			'choiceText': 'A. Sponge-holding forceps',
-			'comment': 'Sorry, this is incorrect. Artery forceps are used to clip any bleeding vessels as accurately as possible taking care not to grab a big chunck of tissue.',
+			'comment': 'Sorry, this is incorrect. Artery forceps should be used to clip any bleeding vessels as accurately as possible, taking care not to grab a big chunk of tissue.',
 			'correct': 'no',
 			'impact': 0,
 			'bonus': 0
 		},
 		{
 			'choiceText': 'B. Artery forceps',
-			'comment': 'Excellent. Artery forceps are used to clip any bleeding vessels as accurately as possible taking care not to grab big chunck of tissue.',
+			'comment': 'Excellent. Artery forceps are used to clip any bleeding vessels as accurately as possible, taking care not to grab a big chunk of tissue.',
 			'correct': 'yes',
 			'impact': 1,
 			'bonus': 0
 		},
 		{
 			'choiceText': 'C. Tissue forceps',
-			'comment': 'Sorry, this is incorrect. Artery forceps are used to clip any bleeding vessels as accurately as possible taking care not to grab a big chunck of tissue.',
+			'comment': 'Sorry, this is incorrect. Artery forceps are used to clip any bleeding vessels as accurately as possible taking care not to grab a big chunk of tissue.',
 			'correct': 'no',
 			'impact': 0,
 			'bonus': 0
@@ -264,21 +256,21 @@ module.exports = {
 		'situationText': "You tie each bleeding vessel with chromic catgut 3-0 suture. What kind of suture technique do you use for the frenulum (6 o'clock)?",
 		'choices': [{
 			'choiceText': 'A. Horizontal mattress suture',
-			'comment': 'Excellent. The horizontal mattress suture is placed gently to avoid piercing the urethra which leads to Urethrocutaneous Fistula.',
+			'comment': 'Excellent. Horizontal mattress sutures are placed gently to avoid piercing the urethra which leads to Urethrocutaneous Fistula.',
 			'correct': 'yes',
 			'impact': 1,
 			'bonus': 0
 		},
 		{
 			'choiceText': 'B. Simple interrupted suture',
-			'comment': 'Sorry, this is incorrect. Simple interrupted suture are placed in between vertical and horizontal mattress sutures.',
+			'comment': 'Sorry, this is incorrect. Simple interrupted sutures are placed in between vertical and horizontal mattress sutures. Horizontal mattress sutures should be used.',
 			'correct': 'no',
 			'impact': -1,
 			'bonus': 0
 		},
 		{
 			'choiceText': 'C. Vertical mattress suture',
-			'comment': "Sorry, this is incorrect. If you use the vertical mattress sutures, you are likely to injure the urethra.",
+			'comment': "Sorry, this is incorrect. If you use the vertical mattress sutures, you are likely to injure the urethra. Horizontal mattress sutures should be used.",
 			'correct': 'no',
 			'impact': 0,
 			'bonus': 0
@@ -291,21 +283,21 @@ module.exports = {
 		'situationText': 'When placing the frenulum suture, you take care to align the line of the frenulum with…',
 		'choices': [{
 			'choiceText': 'A. Glans',
-			'comment': "Sorry, this is incorrect. The frenulum is not stitched to the glans but rather aligned to the midline skin raphe to prevent misalignment. It might result into penile torsion that can lead to painful erection. A horizontal mattress suture is placed at 6 o'clock gently to avoid urethra injury.",
+			'comment': "Sorry, this is incorrect. The frenulum is not stitched to the glans but rather aligned to the midline skin raphe to prevent misalignment. It might result in a penile torsion that can lead to painful erection. A horizontal mattress suture is placed at 6 o'clock gently to avoid urethra injury.",
 			'correct': 'no',
 			'impact': -1,
 			'bonus': 0
 		},
 		{
 			'choiceText': 'B. Penile raphe',
-			'comment': "Sorry, this is incorrect.  The frenulum is aligned with midline skin raphe to avoid misalignment and subsequent penile torsion. Torsion might lead to painful erection. A horizontal mattress suture is placedat 6 o'clock gently to avaoid urethral injury.",
+			'comment': "Sorry, this is incorrect.  The frenulum is aligned with midline skin raphe to avoid misalignment and subsequent penile torsion. Torsion might lead to painful erection. A horizontal mattress suture is placed at 6 o'clock gently to avoid urethral injury.",
 			'correct': 'no',
 			'impact': 0,
 			'bonus': 0
 		},
 		{
 			'choiceText': 'C. Midline skin raphe',
-			'comment': "Excellent!  This helps to prevent misalignment which might subsequently result in penile torson and cause painful erection. A horizontal mattress suture is placedat 6 o'clock gently to avoid urethral injury.",
+			'comment': "Excellent!  This helps to prevent misalignment which might subsequently result in penile torsion and cause painful erection. A horizontal mattress suture is placed at 6 o'clock gently to avoid urethral injury.",
 			'correct': 'yes',
 			'impact': 1,
 			'bonus': 0
@@ -344,22 +336,22 @@ module.exports = {
 	'14': {
 		'situationText': 'After the procedure is ended, blood-soiled linen should be…',
 		'choices': [{
-			'choiceText': 'A. Rinse to remove blood by using clean water before decontamination',
-			'comment': 'Excellent! As per National IPC Guideline, all soiled linen should be rinsed and then decontaminated with hospital approved disinfectant, before transporting to the laundry i.e. 0.05% of chlorine for 20 minutes.',
+			'choiceText': 'A. Rinsed to remove blood by using clean water before decontamination',
+			'comment': 'Excellent! As per National IPC Guidelines, all soiled linen should be rinsed and then decontaminated with hospital approved disinfectant (0.05% of chlorine for 20 minutes) before transporting to the laundry.',
 			'correct': 'yes',
 			'impact': 1,
 			'bonus': 0
 		},
 		{
 			'choiceText': 'B. Cleaned with soap water to remove blood before decontamination using 0.05% Chlorine',
-			'comment': 'Sorry, this is incorrect. As per National IPC Guideline, all soiled linen should be rinsed and then decontaminated with hospital approved disinfectant, before transporting to the laundry i.e. 0.05% of chlorine for 20 minutes.',
+			'comment': 'Sorry, this is incorrect. As per National IPC Guidelines, all soiled linen should be rinsed and then decontaminated with hospital approved  disinfectant (0.05% of chlorine for 20 minutes) before transporting to the laundry.',
 			'correct': 'no',
 			'impact': 0,
 			'bonus': 0
 		},
 		{
 			'choiceText': 'C. Decontaminated before cleaning',
-			'comment': 'Sorry, this is incorrect. As per National IPC Guideline, all soiled linen should be rinsed and then decontaminated with hospital approved disinfectant, before transporting to the laundry i.e. 0.05% of chlorine for 20 minutes.',
+			'comment': 'Sorry, this is incorrect. As per National IPC Guideline, all soiled linen should be rinsed and then decontaminated with hospital approved disinfectant (0.05% of chlorine for 20 minutes) before transporting to the laundry.',
 			'correct': 'no',
 			'impact': -1,
 			'bonus': 0
